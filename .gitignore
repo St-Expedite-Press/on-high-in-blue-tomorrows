@@ -6,6 +6,18 @@
 !.gitattributes
 !README.md
 !burning_world.md
+!A_World_Burning/
+!A_World_Burning/**
+!whitepaper/
+!whitepaper/**
+!pipeline/
+!pipeline/**
+!appendices/
+!appendices/**
+!abstract_photo_workflows/
+!abstract_photo_workflows/**
+!agent_workflow_whitepaper/
+!agent_workflow_whitepaper/**
 !notebooks/
 !notebooks/**
 

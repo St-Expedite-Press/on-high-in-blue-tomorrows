@@ -19,6 +19,7 @@ This folder is an Obsidian-friendly working vault for a book/whitepaper project:
 - `appendices/` — paper-ready appendices (export-friendly copies).
 - `pipeline/` — execution schedule + ingestion contract + notebook etiquette.
 - `notebooks/` — working notebooks.
+- [[notebooks/DATA_DICTIONARY]] — column/field dictionary for the bootstrap manifests + Parquet ledgers.
 
 ---
 
@@ -29,3 +30,10 @@ Nothing gets deleted. When a note is “melted” into the whitepaper:
 - the whitepaper section becomes the **readable argument/spec**,
 - the originating note remains as **provenance**,
 - the section links back to the originating note(s) under “Sources (internal)”.
+
+---
+
+## Repo Hygiene (GitHub)
+
+- Keep large datasets out of Git; treat them as local/S3 assets referenced by manifests, checksums, and ledgers.
+- Canonical plate IDs are `plate-###`; canonical structured sources are `plates_structured/plate-###/source/plate-###.jpg`.
