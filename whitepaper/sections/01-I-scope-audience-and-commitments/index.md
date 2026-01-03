@@ -15,7 +15,7 @@ _TOC-aligned entrypoint. Master outline lives in `A_World_Burning/26-whitepaper-
 
 - I.1 Intended audiences and what each needs
 - I.2 Definitions (canon, edition, variant, manifold, run, ledger, provenance)
-- I.3 Evidence taxonomy and the â€œno untagged claimsâ€ rule
+- I.3 Evidence taxonomy and the ?no untagged claims? rule
 - I.4 Epistemic separation doctrine: documentation vs interpretation vs transformation
 - I.5 Ethics and guardrails (privacy/biometrics, institutional authority, restoration claims, environmental claims)
 - I.6 Commitments to reproducibility (determinism where possible, logged nondeterminism where not)

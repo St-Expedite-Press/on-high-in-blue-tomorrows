@@ -58,14 +58,14 @@ This is the mechanism that allows the archive to tolerate “violence”: once p
 ---
 
 ## Outline (preserved)
-**Purpose:** name the projectâ€™s ontology and state transitions.
+**Purpose:** name the project?s ontology and state transitions.
 
 - V.1 Plate-centric identity (plate is atomic unit)
 - V.2 Variant registration (variants attach to plates)
 - V.3 Run as epistemic event (sealed, append-only, auditable)
 - V.4 Ledger as derived view (fast, disposable; never authoritative)
 - V.5 Stability vs controlled instability
-  - V.5.a â€œStabilityâ€ = reproducible measurement pipeline
-  - V.5.b â€œInstabilityâ€ = downstream stress tests/transformations, explicitly labeled
+  - V.5.a ?Stability? = reproducible measurement pipeline
+  - V.5.b ?Instability? = downstream stress tests/transformations, explicitly labeled
 - V.6 The archive tolerates violence: why provenance-first enables aggressive downstream work
 

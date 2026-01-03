@@ -23,7 +23,7 @@ This is not “organization advice.” It is part of the project’s epistemic c
 
 ### B.2.1 Bootstrap layout (current notebooks; ground truth)
 
-The two completed notebooks (`A_World_Burning/notebooks/*.ipynb`) write and validate this structure:
+The two completed notebooks (`notebooks/*.ipynb`) write and validate this structure:
 
 ```
 <DATASET_ROOT>/

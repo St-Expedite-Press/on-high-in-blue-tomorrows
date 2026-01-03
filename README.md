@@ -1,39 +1,46 @@
 # The Burning World
 
-This folder is an Obsidian-friendly working vault for a book/whitepaper project: **Canonical Digital Editions Under Conditions of Variance**.
+An Obsidian-friendly working vault for a book/whitepaper project: **Canonical Digital Editions Under Conditions of Variance**.
 
-**Start here (read like a document):** [[burning_world]]
+## Start Here
 
-**If you want the raw thinking + technical contracts:** [[A_World_Burning/README]]
+- Read the compiled whitepaper: `burning_world.md` (Obsidian link: `[[burning_world]]`)
+- Jump to the working corpus + contracts: `A_World_Burning/README.md` (Obsidian link: `[[A_World_Burning/README]]`)
 
-**If you want the core extraction/preprocessing contract first:** [[A_World_Burning/00_preprocessing_assay]]
+## Reading Surfaces (What’s “Primary”)
 
----
+- `burning_world.md` — the current compiled whitepaper (single-file reading surface).
+- `whitepaper/DRAFT.md` — sectioned draft version of the same project (better for incremental editing).
+- `whitepaper/MATERIALS_MAP.md` — crosswalk from the working corpus into the section structure.
 
-## Directory Map (what everything is for)
+## Directory Map (What Everything Is For)
 
-- `burning_world.md` — the compiled, Obsidian-friendly whitepaper.
-- `whitepaper/` — prior sectioned draft materials (front matter, sections, appendices).
-- `A_World_Burning/` — working corpus + technical contracts + provenance of how the system evolved.
-- `abstract_photo_workflows/` — general-purpose “feature surface area” + workflow notes that feed extraction/measurement sections.
-- `appendices/` — paper-ready appendices (export-friendly copies).
-- `pipeline/` — execution schedule + ingestion contract + notebook etiquette.
-- `notebooks/` — working notebooks.
-- [[notebooks/DATA_DICTIONARY]] — column/field dictionary for the bootstrap manifests + Parquet ledgers.
+- `A_World_Burning/` — working corpus + technical contracts + provenance notes (the “raw thinking” layer).
+- `whitepaper/` — book/whitepaper structure (front matter, sections, appendices, compiled draft).
+- `appendices/` — export-friendly appendix copies (paper-ready technical specs).
+- `pipeline/` — execution schedule + ingestion contract + notebook etiquette + SageMaker scaffolds.
+- `notebooks/` — runnable notebooks + data dictionary + pinned requirements.
+- `abstract_photo_workflows/` — general-purpose workflow notes and “feature surface area” inventory.
 
----
+## Key Contracts (If You’re Implementing, Not Just Reading)
 
-## Melt Rule (non-destructive)
+- Preprocessing/extraction “do we have everything?” list: `A_World_Burning/00_preprocessing_assay.md`
+- Source-of-truth outline (maximal completeness): `A_World_Burning/26-whitepaper-skeleton.md`
+- Clickable ToC map: `A_World_Burning/30-whitepaper-toc.md`
+- Appendices (canonical specs, A–J): `A_World_Burning/32-appendix-a-corpus-and-source-registry.md` through `A_World_Burning/41-appendix-j-glossary.md`
 
-Nothing gets deleted. When a note is “melted” into the whitepaper:
+## Notebooks (Dataset Bootstrap)
 
-- the whitepaper section becomes the **readable argument/spec**,
-- the originating note remains as **provenance**,
-- the section links back to the originating note(s) under “Sources (internal)”.
+- Data dictionary for the on-disk contract: `notebooks/DATA_DICTIONARY.md`
+- Setup notebook: `notebooks/audubon_bird_plates_setup.ipynb`
+- Read-only handoff notebook: `notebooks/audubon_bird_plates_handoff.ipynb`
+- Minimal pinned deps for notebook execution: `notebooks/requirements.txt`
 
----
+## Obsidian Notes
 
-## Repo Hygiene (GitHub)
+- This repo is designed to be opened as an Obsidian vault.
+- Most navigation is via `[[wikilinks]]` between notes and sections.
 
-- Keep large datasets out of Git; treat them as local/S3 assets referenced by manifests, checksums, and ledgers.
-- Canonical plate IDs are `plate-###`; canonical structured sources are `plates_structured/plate-###/source/plate-###.jpg`.
+## Repo Hygiene
+
+- Local secrets/config live in `.env` and are intentionally not committed.

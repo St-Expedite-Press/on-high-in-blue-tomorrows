@@ -38,11 +38,11 @@ The material below was preserved from an earlier compilation and contains append
 
 Rendered in: `A_World_Burning/32-appendix-a-corpus-and-source-registry.md`
 
-**Goal:** define the population unambiguously; prevent ambiguity about what is â€œinâ€.
+**Goal:** define the population unambiguously; prevent ambiguity about what is ?in?.
 
-- A.1 Corpus boundary statement (Audubon plates 1â€“435; no exceptions)
+- A.1 Corpus boundary statement (Audubon plates 1?435; no exceptions)
 - A.2 Plate identity crosswalk
-  - A.2.a plate_number â†” plate_id (zero padded)
+  - A.2.a plate_number ? plate_id (zero padded)
   - A.2.b title, slug, canonical filenames
 - A.3 Source registry schema
   - A.3.a institution/source name
@@ -51,7 +51,7 @@ Rendered in: `A_World_Burning/32-appendix-a-corpus-and-source-registry.md`
   - A.3.d license/credit statement
   - A.3.e checksums + file fingerprints
 - A.4 Variant registry (if multiple digitizations are added)
-  - A.4.a what makes a new â€œvariantâ€ distinct
+  - A.4.a what makes a new ?variant? distinct
   - A.4.b minimum fields for a variant to be admissible
 - A.5 Exclusion log (what was rejected and why)
 
@@ -80,7 +80,7 @@ Rendered in: `A_World_Burning/34-appendix-c-feature-extraction-inventory.md`
 
 **Goal:** exhaustive list of computed features, with what they capture and fail to capture.
 
-This appendix should mirror the extraction inventory in `A_World_Burning/00_preprocessing_assay.md` but in a â€œpaper-readyâ€ form:
+This appendix should mirror the extraction inventory in `A_World_Burning/00_preprocessing_assay.md` but in a ?paper-ready? form:
 
 - C.1 Feature families (File/container; global pixel; CV; embeddings; segmentation; OCR; captions; forensics; quality; indices)
 - C.2 For each feature family, specify:
@@ -89,7 +89,7 @@ This appendix should mirror the extraction inventory in `A_World_Burning/00_prep
   - C.2.c output shape/schema (fields, dimensionality, normalization)
   - C.2.d storage location (plate-local vs ledger)
   - C.2.e known failure modes and bias
-- C.3 Full enumerated inventory (copy the numbered list 1â€“45, verbatim or as a strict mapping)
+- C.3 Full enumerated inventory (copy the numbered list 1?45, verbatim or as a strict mapping)
 - C.4 Versioning policy (what requires a schema bump; what is additive)
 
 ### Appendix D: Segmentation Methods and Parameters (no semantic overreach)
@@ -99,7 +99,7 @@ This appendix should mirror the extraction inventory in `A_World_Burning/00_prep
 - D.1 Model registry (SAM variants; Mask2Former; others)
 - D.2 Input policies (resizing, tiling, cropping)
 - D.3 Mask generation parameters and any filtering heuristics
-- D.4 Mask representations and conversions (PNG â†” RLE â†” polygons)
+- D.4 Mask representations and conversions (PNG ? RLE ? polygons)
 - D.5 Rejection criteria (hard failures)
 - D.6 QC metrics and dashboards
 - D.7 What segmentation is explicitly not allowed to claim
@@ -142,7 +142,7 @@ This appendix should mirror the extraction inventory in `A_World_Burning/00_prep
 - F.1 Parameter axes and their conceptual interpretation
 - F.2 Allowed transforms (examples: thermal shift, haze/ash, nocturne artifacts, contrast collapse)
 - F.3 Safeguard constraints (edge preservation thresholds, semantic drift ceilings)
-- F.4 Prohibitions (no new anatomy; no â€œrestorationâ€; no factual climate claims)
+- F.4 Prohibitions (no new anatomy; no ?restoration?; no factual climate claims)
 - F.5 Logging requirements (transform manifests; parameter capture; run IDs)
 
 ### Appendix G: Ethical and Interpretive Guardrails (formal refusals)
@@ -175,8 +175,8 @@ This appendix should mirror the extraction inventory in `A_World_Burning/00_prep
 - H.4 Reproducibility warnings (where results vary across versions)
 - H.5 Hardware tier expectations (if using Colab)
   - H.5.a T4 (16GB) baseline assumptions and safe model set
-  - H.5.b L4 (24GB) â€œsweet spotâ€ assumptions and expanded model set
-  - H.5.c A100 (40GB) optional â€œmaximalâ€ set (non-blocking)
+  - H.5.b L4 (24GB) ?sweet spot? assumptions and expanded model set
+  - H.5.c A100 (40GB) optional ?maximal? set (non-blocking)
   - H.5.d dtype policy (fp16/bf16/tf32) and its implications for comparability
 
 ### Appendix I: Known Limitations and Open Questions (ledger of uncertainty)
@@ -201,7 +201,7 @@ This appendix should mirror the extraction inventory in `A_World_Burning/00_prep
 
 ---
 
-## 5. â€œAbsurdly Exhaustiveâ€ Checklists (author-facing, optional in published version)
+## 5. ?Absurdly Exhaustive? Checklists (author-facing, optional in published version)
 
 These are working checklists; they may be moved into a private/internal appendix, but they must exist.
 
@@ -215,7 +215,7 @@ These are working checklists; they may be moved into a private/internal appendix
 - Ledgers built and rebuildable from plate-local truth
 - QC atlas generated; known failures logged
 
-### 5.2 â€œNo silent failureâ€ checklist (per notebook/run)
+### 5.2 ?No silent failure? checklist (per notebook/run)
 
 - Structure assertion ran before any compute
 - Config declared and hashed

@@ -80,7 +80,7 @@ See: [[A_World_Burning/35-appendix-d-segmentation-methods-and-parameters]] for t
   - VIII.5.a segment count distribution
   - VIII.5.b fragmentation/stability measures
   - VIII.5.c largest-segment dominance ratio
-  - VIII.5.d boundary uncertainty / â€œambiguous zonesâ€
+  - VIII.5.d boundary uncertainty / ?ambiguous zones?
 - VIII.6 Segment-level measurement (stats and embeddings per mask)
 - VIII.7 Storage: per-run artifacts + `segments.parquet`
 

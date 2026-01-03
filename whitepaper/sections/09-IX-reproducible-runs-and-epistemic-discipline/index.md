@@ -62,7 +62,7 @@ If a ledger disagrees with plate-local truth, the ledger is wrong.
 ---
 
 ## Outline (preserved)
-**Purpose:** make the system auditable; define what â€œa runâ€ is and how it is sealed.
+**Purpose:** make the system auditable; define what ?a run? is and how it is sealed.
 
 - IX.1 Run ontology
   - IX.1.a Run = sealed event; never edited; never merged
@@ -85,8 +85,8 @@ If a ledger disagrees with plate-local truth, the ledger is wrong.
   - IX.5.c forbidden anti-patterns (silent failures, unregistered writes, implicit state)
 - IX.6 Ledgers: derived, rebuildable, disposable
   - IX.6.a ledger rebuild protocol
-  - IX.6.b â€œledger disagreeing with plate truthâ€ resolution rule
+  - IX.6.b ?ledger disagreeing with plate truth? resolution rule
   - IX.6.c Dual-ledger principle (must be explicit)
-    - plate-local verbose artifacts = authoritative provenance (â€œtruthâ€)
+    - plate-local verbose artifacts = authoritative provenance (?truth?)
     - global ledgers = speed layer (append-only; rebuildable; disposable)
     - if plate-local and ledger disagree, the ledger is wrong

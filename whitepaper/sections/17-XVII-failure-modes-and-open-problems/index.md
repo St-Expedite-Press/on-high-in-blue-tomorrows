@@ -60,7 +60,7 @@ Appendix I maintains an explicit ledger of open problems and unresolved risks.
   - XVII.1.d embedding instability across crops/resolutions
   - XVII.1.e Drive/performance constraints; partial writes; kernel death
 - XVII.2 Conceptual failure modes
-  - XVII.2.a â€œvariance fetishismâ€ (collecting differences without interpretation discipline)
+  - XVII.2.a ?variance fetishism? (collecting differences without interpretation discipline)
   - XVII.2.b premature ontology (naming motifs too early)
   - XVII.2.c institutional authority conflicts (who decides constraints?)
   - XVII.2.d conflation of stress tests with historical truth

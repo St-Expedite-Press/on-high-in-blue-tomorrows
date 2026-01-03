@@ -64,12 +64,12 @@ This makes conservation histories legible rather than hidden.
 ---
 
 ## Outline (preserved)
-**Purpose:** explain what changes for scholarship when the â€œworkâ€ is a manifold.
+**Purpose:** explain what changes for scholarship when the ?work? is a manifold.
 
 - XIV.1 Citation: from single images to variant paths
   - XIV.1.a citing plate_id + source_id + checksum
   - XIV.1.b citing run_id + config hash for derived measurements
 - XIV.2 Teaching and publication: how to present variance without losing legibility
-- XIV.3 Museums and libraries: governance of canonical constraints, not â€œbest imagesâ€
-- XIV.4 Conservation workflows: â€œcanonical does not mean pristineâ€
+- XIV.3 Museums and libraries: governance of canonical constraints, not ?best images?
+- XIV.4 Conservation workflows: ?canonical does not mean pristine?
 

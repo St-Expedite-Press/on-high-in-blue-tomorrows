@@ -22,7 +22,7 @@ _TOC-aligned entrypoint. Master outline lives in `A_World_Burning/26-whitepaper-
 - H.4 Reproducibility warnings (where results vary across versions)
 - H.5 Hardware tier expectations (if using Colab)
   - H.5.a T4 (16GB) baseline assumptions and safe model set
-  - H.5.b L4 (24GB) â€œsweet spotâ€ assumptions and expanded model set
-  - H.5.c A100 (40GB) optional â€œmaximalâ€ set (non-blocking)
+  - H.5.b L4 (24GB) ?sweet spot? assumptions and expanded model set
+  - H.5.c A100 (40GB) optional ?maximal? set (non-blocking)
   - H.5.d dtype policy (fp16/bf16/tf32) and its implications for comparability
 

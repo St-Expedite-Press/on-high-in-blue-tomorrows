@@ -15,7 +15,7 @@ _TOC-aligned entrypoint. Master outline lives in `A_World_Burning/26-whitepaper-
 
 ---
 
-## 5. â€œAbsurdly Exhaustiveâ€ Checklists (author-facing, optional in published version)
+## 5. ?Absurdly Exhaustive? Checklists (author-facing, optional in published version)
 
 These are working checklists; they may be moved into a private/internal appendix, but they must exist.
 
@@ -29,7 +29,7 @@ These are working checklists; they may be moved into a private/internal appendix
 - Ledgers built and rebuildable from plate-local truth
 - QC atlas generated; known failures logged
 
-### 5.2 â€œNo silent failureâ€ checklist (per notebook/run)
+### 5.2 ?No silent failure? checklist (per notebook/run)
 
 - Structure assertion ran before any compute
 - Config declared and hashed

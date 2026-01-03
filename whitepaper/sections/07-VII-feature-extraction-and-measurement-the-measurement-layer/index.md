@@ -83,9 +83,9 @@ Stop conditions are recorded explicitly as part of a run policy so future reader
 
 This section must explicitly align with `A_World_Burning/00_preprocessing_assay.md`.
 
-- VII.1 Extraction philosophy: progressive revelation (cheap certainty â†’ expensive meaning)
+- VII.1 Extraction philosophy: progressive revelation (cheap certainty ? expensive meaning)
 - VII.2 CPU/GPU boundaries and why they matter (cost is epistemic, not just monetary)
-- VII.3 Baseline â€œfactsâ€ vs â€œrepresentationsâ€
+- VII.3 Baseline ?facts? vs ?representations?
   - VII.3.a Header/container facts (no pixel math)
   - VII.3.b Scalar pixel-pass facts (one pass; no distributions)
   - VII.3.c Distribution summaries (sampled/tiled; optional)
@@ -106,13 +106,13 @@ This section must explicitly align with `A_World_Burning/00_preprocessing_assay.
   - VII.6.a Very large images (decompression-bomb thresholds, tiling strategy)
   - VII.6.b Drive performance constraints (many small writes)
   - VII.6.c Nondeterminism in GPU inference (document and bound)
-- VII.7 Stop conditions (when measurement is â€œenoughâ€)
+- VII.7 Stop conditions (when measurement is ?enough?)
   - VII.7.a Stop extracting when new passes stop changing cluster topology
   - VII.7.b Stop when clusters stabilize across multiple embedding families (CLIP vs DINO vs others)
   - VII.7.c Stop when outliers remain outliers regardless of extractor (they become part of the atlas)
   - VII.7.d Stop when additional captioning/weak labels stop introducing new axes (only redundancy)
   - VII.7.e Record the stop decision as a documented policy (with evidence)
-- VII.8 Publication packaging of the measured corpus (still â€œpreprocessingâ€)
+- VII.8 Publication packaging of the measured corpus (still ?preprocessing?)
   - VII.8.a Dataset card contents (what is included/excluded; licensing; known biases)
   - VII.8.b Distribution formats (choose and document)
     - plate-centric folders as primary truth

@@ -77,5 +77,5 @@ See: [[A_World_Burning/25-reel-it-in]].
 - XVIII.4 Research extensions
   - vectorization as second representation regime
   - affect/atmosphere embedding axes
-  - robustness curves as â€œsemantic fragilityâ€ measures
-- XVIII.5 Publication roadmap (link to â€œgalaxyâ€ in `A_World_Burning/25-reel-it-in.md`)
+  - robustness curves as ?semantic fragility? measures
+- XVIII.5 Publication roadmap (link to ?galaxy? in `A_World_Burning/25-reel-it-in.md`)

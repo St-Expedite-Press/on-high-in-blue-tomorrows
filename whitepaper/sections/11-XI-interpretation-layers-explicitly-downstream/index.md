@@ -59,8 +59,8 @@ The system prevents this by strict directory conventions, run sealing, and expli
 - XI.2 Labeling and provenance rules for downstream artifacts
   - XI.2.a transform manifests
   - XI.2.b parameter logs + run IDs
-  - XI.2.c â€œno overwritesâ€ enforced
-- XI.3 â€œContaminationâ€ definition and prevention
+  - XI.2.c ?no overwrites? enforced
+- XI.3 ?Contamination? definition and prevention
   - XI.3.a never allow transformed outputs to replace source or baseline ledgers
   - XI.3.b never treat VLM captions as truth labels
 

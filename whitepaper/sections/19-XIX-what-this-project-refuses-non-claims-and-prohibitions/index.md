@@ -36,9 +36,9 @@ Guardrails and non-claims are formalized in Appendix G.
 ## Outline (preserved)
 **Purpose:** make refusals enforceable and citable.
 
-- XIX.1 No single-image â€œbestâ€ output as canon
+- XIX.1 No single-image ?best? output as canon
 - XIX.2 No claims about original intent or definitive appearance
-- XIX.3 No restoration authority (no â€œimprovementâ€ claims)
+- XIX.3 No restoration authority (no ?improvement? claims)
 - XIX.4 No ecological forecasting or factual climate claims from stress images
 - XIX.5 No biometric identity systems (general guardrail, even if Audubon is safe)
 - XIX.6 No silent failure; no unregistered artifacts; no hidden state

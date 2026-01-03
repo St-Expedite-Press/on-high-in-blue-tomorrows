@@ -7,7 +7,7 @@
 _TOC-aligned entrypoint. Master outline lives in `A_World_Burning/26-whitepaper-skeleton.md`._
 
 
-**Purpose:** show why â€œsingle-image canonâ€ became default and why it fails under variance.
+**Purpose:** show why ?single-image canon? became default and why it fails under variance.
 
 - II.1 The tacit single-file assumption as editorial inheritance
 - II.2 Varieties of variance (enumerate)

@@ -78,7 +78,7 @@ These two are treated as “do not edit except deliberately” baseline artifact
 - `notebooks/audubon_bird_plates_setup.ipynb`
 - `notebooks/audubon_bird_plates_handoff.ipynb`
 
-Note: `notebooks.ipnyb` exists but is empty; ignore unless you intentionally use it as a placeholder.
+Note: notebooks now live in `notebooks/` at the repo root.
 
 ---
 

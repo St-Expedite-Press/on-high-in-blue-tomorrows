@@ -65,7 +65,7 @@ The response is not to pretend bias disappears; it is to document it (Appendix H
 ## Outline (preserved)
 **Purpose:** define acceptable ML use, bias management, and what ML cannot be allowed to decide.
 
-- XIII.1 The â€œinstrumentâ€ rule (ML may measure/segment/mediate; may not decide meaning)
+- XIII.1 The ?instrument? rule (ML may measure/segment/mediate; may not decide meaning)
 - XIII.2 Why single embedding spaces are untrustworthy
   - XIII.2.a ensemble requirement (CLIP + DINO + optional others)
   - XIII.2.b treat disagreement as signal (ambiguity detector)
@@ -74,8 +74,8 @@ The response is not to pretend bias disappears; it is to document it (Appendix H
   - XIII.3.b Western art-history priors; taxonomy priors; caption bias
 - XIII.4 Allowed and forbidden ML tasks
   - Allowed: similarity measurement, salience maps, segmentation confidence, robustness curves
-  - Forbidden: â€œspecies identification as truthâ€, narrative authority, automatic restoration claims
+  - Forbidden: ?species identification as truth?, narrative authority, automatic restoration claims
 - XIII.5 Evaluation and benchmarking (link to Appendix I)
-- XIII.6 â€œStrange instrumentsâ€ policy (optional, but documented)
+- XIII.6 ?Strange instruments? policy (optional, but documented)
   - see: `A_World_Burning/27-strange-models-compendium.md`
 

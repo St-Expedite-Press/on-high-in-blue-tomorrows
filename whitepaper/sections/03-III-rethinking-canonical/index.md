@@ -1,6 +1,6 @@
 <!-- Auto-generated TOC-aligned file. Source of truth: A_World_Burning/26-whitepaper-skeleton.md -->
 
-# III. Rethinking â€œCanonicalâ€
+# III. Rethinking ?Canonical?
 
 [[whitepaper/DRAFT]] | [[whitepaper/MATERIALS_MAP]] | [[A_World_Burning/26-whitepaper-skeleton]]
 
@@ -60,10 +60,10 @@ Once canon is a manifold, editorial practice changes:
 ## Outline (preserved)
 **Purpose:** define canon as constraint + infrastructure rather than authority.
 
-- III.1 Canonical â‰  normative: canon as bounded space, not final image
+- III.1 Canonical ? normative: canon as bounded space, not final image
 - III.2 Canonical digital edition as a registered manifold
-  - III.2.a What counts as a â€œvariantâ€ (definition + minimum metadata)
-  - III.2.b What counts as â€œregisteredâ€ (constraints + documentation)
+  - III.2.a What counts as a ?variant? (definition + minimum metadata)
+  - III.2.b What counts as ?registered? (constraints + documentation)
   - III.2.c Parameterization: axes not knobs (link to parameter discipline)
 - III.3 Canonical constraints
   - III.3.a Identity constraints (stable IDs; non-negotiable mapping)
@@ -72,4 +72,4 @@ Once canon is a manifold, editorial practice changes:
   - III.3.d Representation constraints (storage doctrine: artifacts/facts/perception/meaning)
 - III.4 Editorial consequences: the apparatus becomes primary
   - III.4.a Citation becomes a path in the manifold (plate_id + variant_id/run_id)
-  - III.4.b â€œBest imageâ€ becomes a query result, not an editorial decree
+  - III.4.b ?Best image? becomes a query result, not an editorial decree

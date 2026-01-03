@@ -10,6 +10,6 @@ _TOC-aligned entrypoint. Master outline lives in `A_World_Burning/26-whitepaper-
 - F.1 Parameter axes and their conceptual interpretation
 - F.2 Allowed transforms (examples: thermal shift, haze/ash, nocturne artifacts, contrast collapse)
 - F.3 Safeguard constraints (edge preservation thresholds, semantic drift ceilings)
-- F.4 Prohibitions (no new anatomy; no â€œrestorationâ€; no factual climate claims)
+- F.4 Prohibitions (no new anatomy; no ?restoration?; no factual climate claims)
 - F.5 Logging requirements (transform manifests; parameter capture; run IDs)
 

@@ -58,11 +58,11 @@ See: [[A_World_Burning/32-appendix-a-corpus-and-source-registry]].
 **Purpose:** justify Audubon as methodological stress case.
 
 - IV.1 Corpus summary (what it is, size, plate count, known metadata)
-- IV.2 Why Audubon is a â€œvariance amplifierâ€
+- IV.2 Why Audubon is a ?variance amplifier?
   - IV.2.a Industrial reproduction + illustration domain
   - IV.2.b Repeated digitizations across institutions
   - IV.2.c Page borders, inscriptions, paper tone, foxing, staining
 - IV.3 Why Audubon is not treated as symbol (guard against over-reading)
-- IV.4 Corpus boundary conditions (what counts as â€œin scopeâ€ for Audubon)
-  - IV.4.a Plate count is fixed (1â€“435)
+- IV.4 Corpus boundary conditions (what counts as ?in scope? for Audubon)
+  - IV.4.a Plate count is fixed (1?435)
   - IV.4.b Variant sources allowed (multiple holdings) vs current single-source bootstrap

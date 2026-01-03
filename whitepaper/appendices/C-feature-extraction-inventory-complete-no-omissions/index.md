@@ -11,7 +11,7 @@ Rendered in: `A_World_Burning/34-appendix-c-feature-extraction-inventory.md`
 
 **Goal:** exhaustive list of computed features, with what they capture and fail to capture.
 
-This appendix should mirror the extraction inventory in `A_World_Burning/00_preprocessing_assay.md` but in a â€œpaper-readyâ€ form:
+This appendix should mirror the extraction inventory in `A_World_Burning/00_preprocessing_assay.md` but in a ?paper-ready? form:
 
 - C.1 Feature families (File/container; global pixel; CV; embeddings; segmentation; OCR; captions; forensics; quality; indices)
 - C.2 For each feature family, specify:
@@ -20,6 +20,6 @@ This appendix should mirror the extraction inventory in `A_World_Burning/00_prep
   - C.2.c output shape/schema (fields, dimensionality, normalization)
   - C.2.d storage location (plate-local vs ledger)
   - C.2.e known failure modes and bias
-- C.3 Full enumerated inventory (copy the numbered list 1â€“45, verbatim or as a strict mapping)
+- C.3 Full enumerated inventory (copy the numbered list 1?45, verbatim or as a strict mapping)
 - C.4 Versioning policy (what requires a schema bump; what is additive)
 

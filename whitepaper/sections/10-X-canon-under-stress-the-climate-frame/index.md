@@ -49,10 +49,10 @@ Stress transforms are explicitly prohibited from:
 ---
 
 ## Outline (preserved)
-**Purpose:** define â€œstressâ€ as a controlled methodological pressure, not a claim about reality.
+**Purpose:** define ?stress? as a controlled methodological pressure, not a claim about reality.
 
 - X.1 Climate as frame vs climate as illustration
-- X.2 â€œArchive instabilityâ€ as broader than climate (pigment drift, scanning, compression, institutional divergence)
+- X.2 ?Archive instability? as broader than climate (pigment drift, scanning, compression, institutional divergence)
 - X.3 Stress testing as measurement
   - X.3.a perturbation axes (temperature shift, haze/ash occlusion, nocturne artifacts, contrast collapse)
   - X.3.b parameter discipline: axes, not knobs (link to Appendix F)

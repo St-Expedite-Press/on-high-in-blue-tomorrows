@@ -36,7 +36,7 @@ Excluded (not preprocessing; mentioned elsewhere, but not the focus):
 
 ## Current baseline (what the two moved notebooks cover)
 
-From `A_World_Burning/notebooks/audubon_bird_plates_setup.ipynb` and `A_World_Burning/notebooks/audubon_bird_plates_handoff.ipynb`:
+From `notebooks/audubon_bird_plates_setup.ipynb` and `notebooks/audubon_bird_plates_handoff.ipynb`:
 
 - [x] Define `DATASET_ROOT` and canonical paths in Colab/Drive
 - [x] Build `plates_structured/plate-###/` scaffold

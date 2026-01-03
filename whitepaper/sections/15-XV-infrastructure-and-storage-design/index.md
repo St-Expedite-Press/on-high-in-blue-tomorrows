@@ -62,7 +62,7 @@ Preservation is treated as a design input:
 - XV.4 Vector storage + compression (float16, PQ) and index versioning
 - XV.5 Optional graph layer (Neptune) as derived meaning space
   - XV.5.a nodes/edges ontology
-  - XV.5.b â€œreverse resolution to diskâ€ requirement
+  - XV.5.b ?reverse resolution to disk? requirement
   - XV.5.c graph is derived truth, not primary truth
   - XV.5.d supported graph modes (document which is used)
     - property graph (Gremlin traversal)
@@ -86,7 +86,7 @@ Preservation is treated as a design input:
 - XV.7 Schema and contract versioning (no silent drift)
   - XV.7.a schema version bump rules (when required; how recorded)
   - XV.7.b configuration versioning (config hash; semantic version, if adopted)
-  - XV.7.c â€œno untracked schema changesâ€ enforcement (validation hard-fails)
+  - XV.7.c ?no untracked schema changes? enforcement (validation hard-fails)
 - XV.8 Distribution and interchange (optional but adoption-critical)
   - XV.8.a Parquet/Arrow as the canonical fact transport
   - XV.8.b WebDataset/HDF5/TFRecord only as derived packaging (never canonical truth)

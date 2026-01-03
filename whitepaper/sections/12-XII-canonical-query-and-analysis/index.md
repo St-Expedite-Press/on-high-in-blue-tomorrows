@@ -54,13 +54,13 @@ Query results become citeable only when they can be reconstructed. A citation th
 **Purpose:** show what becomes possible once variance is registered.
 
 - XII.1 Similarity search modes
-  - XII.1.a image â†’ image retrieval (global embeddings)
+  - XII.1.a image ? image retrieval (global embeddings)
   - XII.1.b segment/motif retrieval (segment embeddings)
-  - XII.1.c tile-wise retrieval (â€œthing somewhere in imageâ€)
-  - XII.1.d multimodal retrieval (text â†’ image; caption embeddings)
+  - XII.1.c tile-wise retrieval (?thing somewhere in image?)
+  - XII.1.d multimodal retrieval (text ? image; caption embeddings)
 - XII.2 Clustering and multi-resolution maps
-  - XII.2.a hierarchical clustering (coarseâ†’fine)
-  - XII.2.b outlier mining and â€œrare modeâ€ discovery
+  - XII.2.a hierarchical clustering (coarse?fine)
+  - XII.2.b outlier mining and ?rare mode? discovery
   - XII.2.c near-duplicate and lineage graphs
 - XII.3 Dataset atlas deliverables (figures + dashboards)
 - XII.4 Query outputs as citations (how to cite a result reproducibly)

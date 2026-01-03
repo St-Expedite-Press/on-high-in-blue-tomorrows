@@ -5,6 +5,7 @@
 !.gitignore
 !.gitattributes
 !README.md
+!README_original.md
 !burning_world.md
 !A_World_Burning/
 !A_World_Burning/**
@@ -20,6 +21,11 @@
 !agent_workflow_whitepaper/**
 !notebooks/
 !notebooks/**
+
+# Allow common repo metadata if added later
+!.github/
+!.github/**
+!LICENSE
 
 # Local-only / tooling noise (kept for clarity even with the allowlist)
 .env
