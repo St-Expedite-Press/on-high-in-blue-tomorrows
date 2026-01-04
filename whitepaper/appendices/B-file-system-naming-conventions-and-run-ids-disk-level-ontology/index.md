@@ -11,6 +11,8 @@ Rendered in: `A_World_Burning/33-appendix-b-filesystem-naming-run-ids.md`
 
 **Goal:** reconstructibility; file organization as argument.
 
+Related ontology sketch (semantic layer): `A_World_Burning/43-owl-ontology-sketch.md`
+
 - B.1 Canonical directory map (current vs planned evolution; decision recorded)
 - B.2 Naming law
   - B.2.a plate directories: `plate-###` only
@@ -23,4 +25,3 @@ Rendered in: `A_World_Burning/33-appendix-b-filesystem-naming-run-ids.md`
   - B.5.b optional per-run `run.sha256`
 - B.6 Validators (filesystem + schema + run sealing)
 - B.7 Ledger rebuild contract (how to regenerate parquet from plate truth)
-
