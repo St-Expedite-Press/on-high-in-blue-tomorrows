@@ -163,7 +163,8 @@ Location:
 
 Writer (v0):
 
-- `python -m pipeline.sagemaker.segmentation_otsu_job ...` (cheap, CPU-only baseline segmentation)
+- Notebook: `notebooks/segmentation_otsu_sagemaker_style.ipynb`
+- CLI job: `python -m pipeline.sagemaker.segmentation_otsu_job ...` (cheap, CPU-only baseline segmentation)
 
 Notes:
 

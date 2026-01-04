@@ -43,6 +43,7 @@ An Obsidian-friendly working vault for a book/whitepaper project: **Canonical Di
 - PowerShell wrapper: `scripts/run_cpu_baseline.ps1 -DatasetRoot <DATASET_ROOT> -OutputRoot <OUTPUT_ROOT> -ShardIndex 0 -ShardCount 1 -SkipIfPresent`
 - Segmentation (cheap, Otsu luma; module): `python -m pipeline.sagemaker.segmentation_otsu_job --dataset-root <DATASET_ROOT> --output-root <OUTPUT_ROOT> --max-dim 1024`
 - Segmentation PowerShell wrapper: `scripts/run_segmentation_otsu.ps1 -DatasetRoot <DATASET_ROOT> -OutputRoot <OUTPUT_ROOT> -MaxDim 1024 -ShardIndex 0 -ShardCount 1 -SkipIfPresent`
+- Segmentation notebook: `notebooks/segmentation_otsu_sagemaker_style.ipynb`
 - Normalize old run reports (adds `dataset_root`/`input_root` alias if missing): `python -m pipeline.tools.normalize_run_reports <PATH_TO_REPORT_OR_RUN_OUTPUT_DIR>`
 
 ## Obsidian Notes
