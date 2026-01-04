@@ -52,6 +52,8 @@ This is a “first-pass ink-vs-paper” separation:
 - Dark lines, text, and heavy pigment become foreground.
 - Bright paper/background becomes background.
 
+This primarily captures scan presentation (digitization pipeline tone, exposure, whitening, and framing), not artistic intent.
+
 Because it’s global thresholding on luma, it is sensitive to digitization tone (scanner whitening, exposure) and the corpus-wide highlight clipping already observed in the CPU baseline.
 
 ## Issues Observed (And Why They Matter)
@@ -99,6 +101,8 @@ While preserving provenance discipline (derived outputs only):
 - Add a second mask polarity and store both (dark-foreground vs light-foreground) if plate backgrounds vary.
 - If moving toward semantic segmentation, register a model in `A_World_Burning/29-model-library.md` and treat it as an explicit instrument with documented failure modes.
 
+Any such normalization/adaptive method should be evaluated comparatively against this run as the baseline anchor, not treated as a replacement.
+
 ## What Else There Is To Do Next (If We’re Happy With This Run)
 
 1. Build an “inspection list” export for outliers:
@@ -111,4 +115,3 @@ While preserving provenance discipline (derived outputs only):
 ## Conclusion
 
 Operationally, this segmentation run is a success (complete coverage, no decode/schema failures). Epistemically, it functions as a fast, interpretable triage layer that is predictably sensitive to digitization tone—especially highlight clipping—so it should be used as a QC and routing signal rather than a final segmentation claim.
-
