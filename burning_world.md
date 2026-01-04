@@ -4,6 +4,8 @@
 
 [[A_World_Burning/README]] | [[A_World_Burning/30-whitepaper-toc]] | [[A_World_Burning/26-whitepaper-skeleton]] | [[whitepaper/White Paper I]]
 
+Governance checklist: `GOVERNANCE_CHECKLIST.md`
+
 > [!important] Status + scope
 > This file is a **paper-shaped compilation** so the project reads like a single document in Obsidian.
 > - Source-of-truth outline (maximal): [[A_World_Burning/26-whitepaper-skeleton]]

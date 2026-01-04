@@ -1,380 +1,117 @@
-# Starting to Look Real Formal (Filesystem + Graph Contract)
+# Ingestion Contract (Filesystem + Run Semantics)
 
-Below is a **production-grade, failure-intolerant filesystem + graph ingestion contract** designed to support **Amazon Neptune as the canonical knowledge graph**, with **brutal rejection rules** and **provable lineage** from pixel → embedding → interpretation.
+This document defines the minimum, failure-intolerant rules for ingesting and measuring plates so that:
 
-This is written as if it were going to be audited by a museum, a journal, or a federal archive. Nothing hand-wavy. Nothing “best effort.”
+- source files remain immutable evidence,
+- derived artifacts are append-only and auditable,
+- run outputs are discoverable and verifiable,
+- downstream interpretation never contaminates the core dataset.
 
----
-
-## I. Governing principles (non-negotiable)
-
-1. **Files are evidence.**  
-    Every file must be attributable to:
-    
-    - a plate
-        
-    - a run
-        
-    - a model or algorithm
-        
-    - a configuration hash
-        
-    - a timestamp
-        
-2. **Graphs are derived truth, not primary truth.**  
-    Neptune stores _relationships and interpretations_.  
-    Filesystem stores _grounded artifacts_.
-    
-3. **No silent failure.**  
-    Any deviation from naming, schema, or linkage:
-    
-    - hard error
-        
-    - run aborted
-        
-    - nothing written
-        
-4. **Append-only semantics.**  
-    No overwrites. Ever.  
-    Corrections are new runs.
-    
-5. **Every node in Neptune must be traceable to a file path.**  
-    If it can’t be reverse-resolved to disk → it doesn’t exist.
-    
+See also: `GOVERNANCE_CHECKLIST.md`
 
 ---
 
-## II. Canonical directory hierarchy (final)
+## 1. Governing Principles (Non-Negotiable)
+
+1. Files are evidence.
+   - Every derived file must be attributable to a plate, a run ID, a method/model ID, parameters, and a timestamp.
+2. No silent failure.
+   - Any deviation from naming/schema/linkage is a hard error; the run aborts; nothing is written.
+3. Append-only semantics.
+   - No overwrites. Ever. Corrections are new runs.
+4. Core vs derived separation.
+   - Core = immutable source image + plate manifest.
+   - Derived = append-only artifacts under `runs/<run_id>/...`.
+
+---
+
+## 2. Canonical Destination vs `_RUN_OUTPUT/`
+
+- `_RUN_OUTPUT/` is explicitly a working/staging destination.
+- For now, validated runs are treated as canonical in place on local disk.
+- Path law: `_RUN_OUTPUT/` is authoritative until a remote store is defined; when that happens, runs are copied unchanged.
+
+---
+
+## 3. Schema Authority
+
+- Schemas are authoritative in-repo (versioned).
+- Jobs/notebooks may copy schemas into run outputs for self-description but must not originate or modify schemas there.
+- Any schema copied into a run output must reference the repo version/hash.
+
+---
+
+## 4. Directory Layout (Minimum Contract)
+
+Input dataset root (read-only):
 
 ```
-burning-world-series/
-│
-├── datasets/
-│   └── audubon/
-│       ├── raw/                         # Untouched source material
-│       │   ├── img/
-│       │   │   └── ranges/              # 1-99/, 100-199/, etc
-│       │   ├── data.json
-│       │   └── README.md
-│       │
-│       ├── structured/                  # Plate-centric canonical form
-│       │   └── plate-XXX/
-│       │       ├── manifest.json
-│       │       ├── source.sha256
-│       │       ├── source/
-│       │       │   └── plate-XXX.original.jpg
-│       │       ├── derived/
-│       │       │   ├── input_image.json
-│       │       │   └── image_header.json
-│       │       ├── runs/
-│       │       │   └── run-YYYYMMDD-HHMMSS-<hash>/
-│       │       │       ├── run.manifest.json
-│       │       │       ├── config.json
-│       │       │       ├── outputs/
-│       │       │       │   ├── embeddings/
-│       │       │       │   ├── segments/
-│       │       │       │   ├── metrics/
-│       │       │       │   └── visuals/
-│       │       │       └── run.sha256
-│       │       └── viz/                 # Human-readable previews only
-│       │
-│       ├── ledgers/
-│       │   ├── plates.parquet
-│       │   ├── runs.parquet
-│       │   ├── embeddings.parquet
-│       │   ├── segments.parquet
-│       │   └── neptune_ingest.parquet
-│       │
-│       ├── schemas/
-│       │   ├── plate.manifest.schema.json
-│       │   ├── run.manifest.schema.json
-│       │   ├── embedding.schema.json
-│       │   ├── segment.schema.json
-│       │   └── neptune.node.schema.json
-│       │
-│       └── validators/
-│           ├── filesystem.py
-│           ├── schemas.py
-│           ├── checksums.py
-│           └── neptune_contract.py
-│
-├── graph/
-│   ├── neptune/
-│   │   ├── nodes/
-│   │   ├── edges/
-│   │   ├── bulk_load/
-│   │   └── mapping/
-│   │
-│   └── ontology/
-│       ├── core.ttl
-│       ├── audubon.ttl
-│       ├── burning_world.ttl
-│       └── provenance.ttl
-│
-├── notebooks/
-├── scripts/
-└── docs/
+<DATASET_ROOT>/
+  data.json
+  schemas/
+    plate.manifest.schema.json
+    run.manifest.schema.json
+    ...
+  plates_structured/
+    plate-001/
+      manifest.json
+      source/
+        <immutable source image referenced by manifest.json>
+    plate-002/
+      ...
+```
+
+Run output root (write-only; may equal `<DATASET_ROOT>/_RUN_OUTPUT`):
+
+```
+<OUTPUT_ROOT>/
+  schemas/                      # optional copies for self-description
+  reports/
+    <run_id>/
+      report.json
+  plates_structured/
+    plate-001/
+      runs/
+        <run_id>/
+          metrics.json
+          <run artifacts...>
 ```
 
 ---
 
-## III. File naming law (strict)
+## 5. Run Registry / Discovery
 
-### 1. Plate identifiers (immutable)
-
-```
-plate-001 … plate-435
-```
-
-• Zero-padded  
-• No aliases  
-• Never inferred from filenames after bootstrap
+- Canonical registry is `reports/<run_id>/report.json`.
+- Discovery is by enumerating `reports/` (an aggregated index is optional later, and must be derived).
 
 ---
 
-### 2. Run identifiers (collision-resistant)
+## 6. Verification Checklist (Hard Gates)
 
-```
-run-YYYYMMDD-HHMMSS-<8char_hash>
-```
+A run is considered valid only if all of the following pass:
 
-Where `<hash>` = SHA-1(models + config + code_version)[:8]
-
-**Failure conditions**
-
-- duplicate run ID
-    
-- missing config.json
-    
-- timestamp mismatch  
-    → abort
-    
+1. Plate count invariant: expected number of plates is present (Audubon: 435).
+2. Plate manifests validate against `schemas/plate.manifest.schema.json`.
+3. Source files exist for every selected plate (`manifest.json.source_image` resolves to an existing file).
+4. Run manifest (`metrics.json`) exists for every processed plate and validates against `schemas/run.manifest.schema.json`.
+5. Required run artifacts exist for every processed plate (job-specific).
+6. Run-level report exists at `reports/<run_id>/report.json` and includes required fields:
+   - `run_id`, `timestamp`, `dataset_root`, `output_root`, `plates_total`, `plates_selected`, `plates_processed`, `decode_failures`, `schema_failures`
+7. Output schemas validate (when applicable): if an artifact schema exists, artifacts must validate against it.
 
 ---
 
-### 3. Derived artifact naming
+## 7. Provenance Requirements (Minimum)
 
-Every derived file **must encode its lineage**:
+Each derived artifact must carry enough provenance to reproduce and audit it:
 
-```
-<plate_id>__<run_id>__<artifact_type>__<descriptor>.<ext>
-```
-
-Examples:
-
-```
-plate-123__run-20260112-142233-acde9123__embedding__clip-vit-l14.npy
-plate-123__run-20260112-142233-acde9123__segment__sam-mask-004.png
-plate-123__run-20260112-142233-acde9123__metric__entropy.json
-```
-
-**No freeform names. Ever.**
-
----
-
-## IV. Run manifest (required, enforced)
-
-`run.manifest.json`
-
-```json
-{
-  "run_id": "run-20260112-142233-acde9123",
-  "plate_id": "plate-123",
-  "timestamp": "2026-01-12T14:22:33Z",
-  "models": [
-    "clip-vit-l14",
-    "sam-vit-h"
-  ],
-  "code_version": "git:9f3c2a1",
-  "config_hash": "sha256:…",
-  "inputs": [
-    "source/plate-123.original.jpg"
-  ],
-  "outputs": [],
-  "neptune_nodes": [],
-  "status": "incomplete"
-}
-```
-
-**Rules**
-
-- outputs list must be populated before status → `complete`
-    
-- neptune_nodes must be resolvable to graph IDs
-    
-
----
-
-## V. Brutal failure system (what gets rejected)
-
-### A. Filesystem validation (pre-run)
-
-Reject if:
-
-- plate directory missing required subdirs
-    
-- more than one file in `source/`
-    
-- checksum mismatch
-    
-- manifest schema violation
-    
-
-### B. Run-time validation
-
-Abort immediately if:
-
-- any output path does not match naming law
-    
-- output not registered in run.manifest
-    
-- array dimensions inconsistent with metadata
-    
-- image mutated without declaring transform
-    
-
-### C. Post-run validation
-
-Reject entire run if:
-
-- run.sha256 mismatch
-    
-- missing ledger entry
-    
-- Neptune ingest file incomplete
-    
-- orphaned graph nodes detected
-    
-
----
-
-## VI. Amazon Neptune integration (authoritative graph)
-
-### 1. What goes into Neptune
-
-**Nodes**
-
-- Plate
-    
-- Image
-    
-- Segment
-    
-- Embedding
-    
-- Species
-    
-- MorphologicalFeature
-    
-- EnvironmentalCondition
-    
-- Transformation
-    
-- Run
-    
-
-**Edges**
-
-- `DERIVED_FROM`
-    
-- `SEGMENTS`
-    
-- `EMBEDS`
-    
-- `TRANSFORMS`
-    
-- `IMPLIES`
-    
-- `OBSERVED_IN`
-    
-- `GENERATED_BY`
-    
-
----
-
-### 2. Neptune bulk ingestion pipeline
-
-**Filesystem → Parquet → CSV → Neptune**
-
-```
-ledgers/*.parquet
-   ↓
-graph/neptune/bulk_load/
-   ├── nodes.csv
-   ├── edges.csv
-   └── load.properties
-```
-
-Each row must include:
-
-- `source_file_path`
-    
-- `run_id`
-    
 - `plate_id`
-    
-- `checksum`
-    
+- `run_id`
+- `timestamp` (UTC recommended)
+- input reference(s) (`source_image` path; checksums where applicable)
+- `method` / `model` identifier
+- `params`
+- code version/hash (recorded either inside the artifact or in `report.json`)
 
-If any row cannot be reverse-resolved → **entire load rejected**
+No new tooling is required to enforce this; it is a required field set.
 
----
-
-## VII. Ontology discipline (non-optional)
-
-You must maintain:
-
-- `core.ttl` → generic graph concepts
-    
-- `audubon.ttl` → species, plates, taxonomy
-    
-- `burning_world.ttl` → counterfactual constructs
-    
-- `provenance.ttl` → run, artifact, derivation
-    
-
-**No node enters Neptune without ontology grounding.**
-
----
-
-## VIII. What this system gives you
-
-• Museum-grade auditability  
-• Paper-ready reproducibility  
-• Zero silent drift  
-• Safe ML experimentation  
-• Ability to retract or supersede interpretations without deleting history  
-• A graph that can survive 20 years of reinterpretation
-
-Most importantly:  
-**It keeps interpretation downstream from evidence.**
-
----
-
-## IX. Immediate next actions (recommended)
-
-1. Freeze this directory + naming contract as LAW.md
-    
-2. Implement `validators/filesystem.py` first
-    
-3. Stub Neptune node/edge schemas
-    
-4. Do _one_ CLIP+SAM run end-to-end with full rejection enabled
-    
-5. Only then scale
-    
-
-If you want next:
-
-- I can design the exact Neptune node/edge schemas
-    
-- Write the Gremlin or SPARQL patterns
-    
-- Create the validator code skeletons
-    
-- Design the “Burning World” ontology layer
-    
-- Map this directly to a paper methods section
-    
-
-Just say where to drill next.
