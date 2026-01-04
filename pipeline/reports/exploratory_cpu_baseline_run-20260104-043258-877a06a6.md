@@ -1,4 +1,4 @@
-# Exploratory Run Report — CPU Baseline
+# Exploratory Run Report - CPU Baseline
 
 Run ID: `run-20260104-043258-877a06a6`  
 Date (UTC): `2026-01-04T04:32:58Z`  
@@ -6,7 +6,7 @@ Run output root: `audubon-bird-plates-copy-1/_RUN_OUTPUT/`
 
 ## What We Ran
 
-This exploratory run generated a “CPU baseline” feature bundle per plate:
+This exploratory run generated a "CPU baseline" feature bundle per plate:
 
 - Image geometry (width/height/megapixels/aspect ratio)
 - Histogram-based pixel stats for RGB and luma (min/max/mean/std)
@@ -29,7 +29,7 @@ This indicates the dataset scaffold is consistent (expected `plates_structured/`
 
 ## Summary Statistics (Quick QC)
 
-These are useful to detect drift/outliers, not to “judge” images:
+These are useful to detect drift/outliers, not to "judge" images:
 
 - Megapixels: median `28.737`, p99 `112.917`, max `117.220`
 - Laplacian variance: median `590.185`, p1 `231.411`, p99 `1650.142`
@@ -43,8 +43,8 @@ Notable: highlight clipping is widespread in this corpus (very high `clip_L_high
 
 ### 1) Report field name mismatch (`input_root` vs `dataset_root`)
 
-- The run’s `report.json` used `input_root`, while `pipeline/sagemaker/cpu_baseline_job.py` used `dataset_root`.
-- Root cause: “Run All” was executed in `notebooks/cpu_baseline_sagemaker_style.ipynb`, which used `input_root` by design (environment-first notebook contract).
+- The run's `report.json` used `input_root`, while `pipeline/sagemaker/cpu_baseline_job.py` used `dataset_root`.
+- Root cause: "Run All" was executed in `notebooks/cpu_baseline_sagemaker_style.ipynb`, which used `input_root` by design (environment-first notebook contract).
 
 Mitigation applied:
 
@@ -115,27 +115,27 @@ Without adding ML inference, we can still add cheap, reproducible, interpretable
 
 ## What Else There Is To Do Next
 
-If we’re happy with this exploratory baseline, the next useful steps are:
+If we're happy with this exploratory baseline, the next useful steps are:
 
 1. Write an aggregator to produce a single QC table (CSV/Parquet) from all `cpu_baseline.json`.
 2. Add pHash near-duplicate clustering + an inspection list export.
-3. Formalize thresholds/guardrails (“too clipped”, “too blurry”, “too small”, “too anomalous”) and how they affect downstream runs.
+3. Formalize thresholds/guardrails ("too clipped", "too blurry", "too small", "too anomalous") and how they affect downstream runs.
 4. Decide whether to treat tone normalization as a separate downstream interpretation-layer artifact (recommended) vs part of measurement (risky).
 
-## Note: What “Clipping” Means Here
+## Note: What "Clipping" Means Here
 
 Clipping is what happens when pixel values hit the hard limits of a representable range and everything beyond those limits collapses to a single value.
 
-For 8-bit images, the luma range is 0–255:
+For 8-bit images, the luma range is 0-255:
 
 - Anything darker than 0 becomes 0 (shadow clipping).
 - Anything brighter than 255 becomes 255 (highlight clipping).
 
-In this run, the very high `clip_L_high_ratio` indicates a large fraction of pixels are pegged at maximum luma. That strongly suggests scanner exposure, aggressive background whitening, or tone-curve normalization during digitization—not something intrinsic to the plates themselves.
+In this run, the very high `clip_L_high_ratio` indicates a large fraction of pixels are pegged at maximum luma. That strongly suggests scanner exposure, aggressive background whitening, or tone-curve normalization during digitization - not something intrinsic to the plates themselves.
 
 Why this matters:
 
-- Once clipping happens, information is irreversibly lost; you can’t recover detail that was never recorded.
+- Once clipping happens, information is irreversibly lost; you can't recover detail that was never recorded.
 - That makes clipping a measurement/provenance concern (comparability across institutions), not an aesthetic one.
 
 ## Conclusion
