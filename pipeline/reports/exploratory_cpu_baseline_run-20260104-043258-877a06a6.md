@@ -4,6 +4,11 @@ Run ID: `run-20260104-043258-877a06a6`
 Date (UTC): `2026-01-04T04:32:58Z`  
 Run output root: `audubon-bird-plates-copy-1/_RUN_OUTPUT/`
 
+## Reproduce
+
+- Notebook (what was run here): `notebooks/cpu_baseline_sagemaker_style.ipynb`
+- CLI equivalent: `python -m pipeline.sagemaker.cpu_baseline_job --dataset-root <DATASET_ROOT> --output-root <OUTPUT_ROOT> --shard-index 0 --shard-count 1`
+
 ## What We Ran
 
 This exploratory run generated a "CPU baseline" feature bundle per plate:

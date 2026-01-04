@@ -4,6 +4,11 @@ Run ID: `run-20260104-053757-923adfbe`
 Date (UTC): `2026-01-04T05:37:57Z`  
 Run output root: `audubon-bird-plates-copy-1/_RUN_OUTPUT/`
 
+## Reproduce
+
+- Notebook (what was run here): `notebooks/segmentation_otsu_sagemaker_style.ipynb`
+- CLI equivalent: `python -m pipeline.sagemaker.segmentation_otsu_job --dataset-root <DATASET_ROOT> --output-root <OUTPUT_ROOT> --shard-index 0 --shard-count 1 --max-dim 1024`
+
 ## What We Ran
 
 This exploratory run generated a cheap, CPU-only segmentation per plate using Otsu thresholding on luma:
