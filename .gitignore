@@ -21,6 +21,8 @@
 !agent_workflow_whitepaper/**
 !notebooks/
 !notebooks/**
+!scripts/
+!scripts/**
 
 # Allow common repo metadata if added later
 !.github/

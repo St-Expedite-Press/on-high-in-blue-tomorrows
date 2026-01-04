@@ -36,6 +36,13 @@ An Obsidian-friendly working vault for a book/whitepaper project: **Canonical Di
 - Read-only handoff notebook: `notebooks/audubon_bird_plates_handoff.ipynb`
 - Minimal pinned deps for notebook execution: `notebooks/requirements.txt`
 
+## Running Without Notebooks
+
+- Install dependencies for the CPU baseline job: `python -m pip install -r pipeline/sagemaker/requirements.txt`
+- CPU baseline job (module): `python -m pipeline.sagemaker.cpu_baseline_job --dataset-root <DATASET_ROOT> --output-root <OUTPUT_ROOT>`
+- PowerShell wrapper: `scripts/run_cpu_baseline.ps1 -DatasetRoot <DATASET_ROOT> -OutputRoot <OUTPUT_ROOT> -ShardIndex 0 -ShardCount 1 -SkipIfPresent`
+- Normalize old run reports (adds `dataset_root`/`input_root` alias if missing): `python -m pipeline.tools.normalize_run_reports <PATH_TO_REPORT_OR_RUN_OUTPUT_DIR>`
+
 ## Obsidian Notes
 
 - This repo is designed to be opened as an Obsidian vault.

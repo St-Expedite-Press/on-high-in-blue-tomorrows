@@ -183,6 +183,7 @@ def main() -> int:
         "run_id": run_id,
         "timestamp": utc_iso(),
         "dataset_root": str(dataset_root),
+        "input_root": str(dataset_root),
         "output_root": str(output_root),
         "shard_index": args.shard_index,
         "shard_count": args.shard_count,

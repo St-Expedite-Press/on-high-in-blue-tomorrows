@@ -126,3 +126,72 @@ If we’re happy with this exploratory run, the next “useful” steps are:
 
 This exploratory run is a success operationally (all plates processed, no schema/decode failures) and already reveals meaningful variance signals (especially highlight clipping). The issues surfaced are mostly about (a) standardizing metadata fields across execution environments and (b) deciding how to handle tone/clipping variance in a provenance-safe way.
 
+## Note: What “Clipping” Means Here
+
+Clipping is what happens when pixel values hit the hard limits of a representable range and everything beyond those limits collapses to a single value.
+
+For 8-bit images, the luma range is 0–255:
+
+- Anything darker than 0 becomes 0 (shadow clipping).
+- Anything brighter than 255 becomes 255 (highlight clipping).
+
+In this run, the very high `clip_L_high_ratio` indicates a large fraction of pixels are pegged at maximum luma. That strongly suggests scanner exposure, aggressive background whitening, or tone-curve normalization during digitization—not something intrinsic to the plates themselves.
+
+Why this matters:
+
+- Once clipping happens, information is irreversibly lost; you can’t recover detail that was never recorded.
+- That makes clipping a measurement/provenance concern (comparability across institutions), not an aesthetic one.
+
+
+
+
+Report Ammended:
+
+Clipping is what happens when image data hits the **hard limits of a representable range** and everything beyond those limits gets collapsed to a single value.
+
+In digital images, most pixel values live in a fixed numeric range. For 8-bit images, that range is 0–255. Anything darker than 0 becomes 0. Anything brighter than 255 becomes 255. When a significant number of pixels pile up at either extreme, you have clipping.
+
+There are two kinds, and they behave differently.
+
+Highlight clipping
+This is when bright areas are pushed up to the maximum value (255 for 8-bit). Once clipped, differences between “very bright” and “extremely bright” are gone. Paper texture, faint lines, light washes, and subtle shading disappear into flat white. In histograms, this shows up as a spike at the high end.
+
+In your run, the very high `clip_L_high_ratio` means a large fraction of pixels are pegged at maximum luma. That strongly suggests scanner exposure, aggressive background whitening, or tone-curve normalization during digitization—not something intrinsic to Audubon’s plates.
+
+Shadow clipping
+This is the opposite: dark areas collapse to 0. Detail in shadows is lost. In your data, this is rare, which implies the digitization pipelines prioritized preserving dark ink and linework while sacrificing highlight nuance.
+
+Why clipping matters
+Once clipping happens, information is **irreversibly lost**. No downstream method—ML, diffusion, enhancement—can recover detail that was never recorded. You can hallucinate, but you cannot reconstruct.
+
+That’s why clipping is not an aesthetic issue; it’s a measurement and provenance issue.
+
+Why you measured it in the baseline
+Your CPU baseline doesn’t try to “fix” clipping. It only detects and quantifies it. That’s exactly right.
+
+Clipping ratios answer questions like:
+
+* How much of this image is already saturated?
+* Are two scans comparable, or does one have a radically different tone ceiling?
+* Should this plate be routed differently downstream?
+
+In your pipeline, clipping is a **routing signal**, not a verdict.
+
+A key distinction
+Clipping is not the same as “brightness” or “contrast.”
+
+An image can be bright without clipping if detail is preserved near white. An image can be high-contrast without clipping if the full range is used smoothly. Clipping is specifically about **hitting the ceiling or floor and flattening detail**.
+
+Why highlight clipping is common in cultural heritage scans
+Institutions often optimize for:
+
+* legibility of dark marks,
+* clean white backgrounds for print/web,
+* consistency across plates.
+
+Those goals systematically push highlights into clipping. From an archival standpoint, this is understandable. From a measurement and ML standpoint, it introduces bias.
+
+Your baseline run surfaced that bias without correcting it. That’s the correct order of operations.
+
+In short:
+Clipping is the point where the measuring instrument stops measuring and starts flattening reality. Your work is about detecting where that happens before anyone pretends the data is neutral.
