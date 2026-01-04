@@ -1,6 +1,6 @@
 # Appendix H: Model Cards and Dependency Registry (Epistemic + Legal Clarity)
 
-[[A_World_Burning/README]] | [[A_World_Burning/30-whitepaper-toc]] | [[A_World_Burning/26-whitepaper-skeleton]]
+[A_World_Burning/README](../A_World_Burning/README.md) | [A_World_Burning/30-whitepaper-toc](../A_World_Burning/30-whitepaper-toc.md) | [A_World_Burning/26-whitepaper-skeleton](../A_World_Burning/26-whitepaper-skeleton.md)
 
 This appendix records the model and dependency surface area that can affect results, licensing, and long-term reproducibility.
 
@@ -11,8 +11,8 @@ Two rules:
 
 Related:
 
-- Model library: `29-model-library.md`
-- Reproducibility protocol: `36-appendix-e-reproducibility-protocols.md`
+- Model library: [A_World_Burning/29-model-library.md](../A_World_Burning/29-model-library.md)
+- Reproducibility protocol: [appendices/E_reproducibility_protocols.md](E_reproducibility_protocols.md) (source: [A_World_Burning/36-appendix-e-reproducibility-protocols.md](../A_World_Burning/36-appendix-e-reproducibility-protocols.md))
 
 ---
 

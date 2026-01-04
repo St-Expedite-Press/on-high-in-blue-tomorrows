@@ -1,14 +1,14 @@
 # The Burning World
 ## Canonical Digital Editions Under Conditions of Variance
-### Working Whitepaper Draft (compiled, Obsidian-friendly)
+### Working Whitepaper Draft (compiled)
 
-[[A_World_Burning/README]] | [[A_World_Burning/30-whitepaper-toc]] | [[A_World_Burning/26-whitepaper-skeleton]] | [[whitepaper/White Paper I]]
+[A_World_Burning/README](README.md) | [A_World_Burning/30-whitepaper-toc](30-whitepaper-toc.md) | [A_World_Burning/26-whitepaper-skeleton](26-whitepaper-skeleton.md) | [whitepaper/White Paper I](../whitepaper/White%20Paper%20I.md)
 
 > [!important] Status + scope
-> This file is a **paper-shaped compilation** so the project reads like a single document in Obsidian.
-> - Source-of-truth outline (maximal): [[A_World_Burning/26-whitepaper-skeleton]]
-> - Extraction + preprocessing contracts (implementation-facing): [[A_World_Burning/00_preprocessing_assay]], [[A_World_Burning/33-appendix-b-filesystem-naming-run-ids]], [[A_World_Burning/34-appendix-c-feature-extraction-inventory]]
-> - Appendices A–J (paper-ready): [[A_World_Burning/32-appendix-a-corpus-and-source-registry]] through [[A_World_Burning/41-appendix-j-glossary]]
+> This file is a **paper-shaped compilation** so the project reads like a single document.
+> - Source-of-truth outline (maximal): [A_World_Burning/26-whitepaper-skeleton](26-whitepaper-skeleton.md)
+> - Extraction + preprocessing contracts (implementation-facing): [A_World_Burning/00_preprocessing_assay](00_preprocessing_assay.md), [A_World_Burning/33-appendix-b-filesystem-naming-run-ids](33-appendix-b-filesystem-naming-run-ids.md), [A_World_Burning/34-appendix-c-feature-extraction-inventory](34-appendix-c-feature-extraction-inventory.md)
+> - Appendices A–J (paper-ready): [A_World_Burning/32-appendix-a-corpus-and-source-registry](32-appendix-a-corpus-and-source-registry.md) through [A_World_Burning/41-appendix-j-glossary](41-appendix-j-glossary.md)
 
 ---
 
@@ -36,7 +36,7 @@ The title _The Burning World_ names the condition under which this work is situa
 
 ## 2. Table of Contents (I–XX)
 
-Use the clickable map: [[A_World_Burning/30-whitepaper-toc]].
+Use the clickable map: [A_World_Burning/30-whitepaper-toc](30-whitepaper-toc.md).
 
 This draft follows the same macro-structure as the skeleton:
 
@@ -66,7 +66,7 @@ This draft follows the same macro-structure as the skeleton:
 ## I. Scope, Audience, and Commitments
 
 > [!note] Primary technical references
-> [[A_World_Burning/26-whitepaper-skeleton]] • [[A_World_Burning/38-appendix-g-ethical-and-interpretive-guardrails]] • [[A_World_Burning/36-appendix-e-reproducibility-protocols]]
+> [A_World_Burning/26-whitepaper-skeleton](26-whitepaper-skeleton.md) • [A_World_Burning/38-appendix-g-ethical-and-interpretive-guardrails](38-appendix-g-ethical-and-interpretive-guardrails.md) • [A_World_Burning/36-appendix-e-reproducibility-protocols](36-appendix-e-reproducibility-protocols.md)
 
 This whitepaper functions simultaneously as an argument (canon as constraint), a specification (disk/run/ledger contracts), and a reproducible methods guide (sealed runs as lab practice).
 
@@ -77,7 +77,7 @@ Commitments:
 - **No silent semantics**: upstream segmentation/embedding outputs are instruments, not truth claims.
 - **Interpretation is downstream**: any transformation that changes pixels or claims meaning is labeled and prevented from contaminating the documentary layer.
 
-This section’s non-claims and guardrails are formalized in [[A_World_Burning/38-appendix-g-ethical-and-interpretive-guardrails]].
+This section’s non-claims and guardrails are formalized in [A_World_Burning/38-appendix-g-ethical-and-interpretive-guardrails](38-appendix-g-ethical-and-interpretive-guardrails.md).
 
 ---
 
@@ -114,7 +114,7 @@ The bootstrap corpus (one image per plate) is a convenience for building the mac
 ## V. Conceptual Architecture of _The Burning World_
 
 > [!note] Primary technical references
-> [[A_World_Burning/32-appendix-a-corpus-and-source-registry]] • [[A_World_Burning/33-appendix-b-filesystem-naming-run-ids]]
+> [A_World_Burning/32-appendix-a-corpus-and-source-registry](32-appendix-a-corpus-and-source-registry.md) • [A_World_Burning/33-appendix-b-filesystem-naming-run-ids](33-appendix-b-filesystem-naming-run-ids.md)
 
 Core commitments:
 
@@ -133,7 +133,7 @@ The architectural split is explicit:
 ## VI. Data Ingestion and Provenance Control (the documentary layer)
 
 > [!note] Primary technical references
-> [[A_World_Burning/32-appendix-a-corpus-and-source-registry]] • [[A_World_Burning/33-appendix-b-filesystem-naming-run-ids]] • [[A_World_Burning/28-sources-and-variant-acquisition]] • [[A_World_Burning/00_preprocessing_assay]]
+> [A_World_Burning/32-appendix-a-corpus-and-source-registry](32-appendix-a-corpus-and-source-registry.md) • [A_World_Burning/33-appendix-b-filesystem-naming-run-ids](33-appendix-b-filesystem-naming-run-ids.md) • [A_World_Burning/28-sources-and-variant-acquisition](28-sources-and-variant-acquisition.md) • [A_World_Burning/00_preprocessing_assay](00_preprocessing_assay.md)
 
 ### VI.1 Ontology: plate identity, sources, variants
 
@@ -145,7 +145,7 @@ In _The Burning World_, the plate is the atomic unit of identity. Plate identity
 
 The ingestion system distinguishes **sources** (provenance containers) from **variants** (specific digital files). A source can contribute one or many variants per plate; a plate can accumulate many variants across sources. The system never collapses these into a single “best” image upstream of measurement; it stores all admitted variants and records why each was admitted.
 
-Canonical corpus boundaries and plate identity fields are specified in [[A_World_Burning/32-appendix-a-corpus-and-source-registry]].
+Canonical corpus boundaries and plate identity fields are specified in [A_World_Burning/32-appendix-a-corpus-and-source-registry](32-appendix-a-corpus-and-source-registry.md).
 
 ### VI.2 Bootstrap ingestion (Mode A) vs variance ingestion (Mode B)
 
@@ -153,7 +153,7 @@ Mode A (bootstrap) establishes the minimum canonical apparatus using one canonic
 
 Mode B (variance) is the real target: it grows the corpus by adding institutional digitizations and derivative reproductions as registered variants, while preserving plate identity and provenance.
 
-The acquisition discipline and variant registration schema are specified in [[A_World_Burning/28-sources-and-variant-acquisition]].
+The acquisition discipline and variant registration schema are specified in [A_World_Burning/28-sources-and-variant-acquisition](28-sources-and-variant-acquisition.md).
 
 ### VI.3 Immutability, checksums, and “evidence”
 
@@ -175,14 +175,14 @@ Core requirements:
 - Runs are sealed events that emit append-only artifacts with run manifests.
 - Stable naming conventions and run IDs make artifacts traceable and auditable.
 
-The full layout, naming law, and run-sealing protocol are specified in [[A_World_Burning/33-appendix-b-filesystem-naming-run-ids]].
+The full layout, naming law, and run-sealing protocol are specified in [A_World_Burning/33-appendix-b-filesystem-naming-run-ids](33-appendix-b-filesystem-naming-run-ids.md).
 
 ---
 
 ## VII. Feature Extraction and Measurement (the measurement layer)
 
 > [!note] Primary technical references
-> [[A_World_Burning/34-appendix-c-feature-extraction-inventory]] • [[A_World_Burning/29-model-library]] • [[A_World_Burning/39-appendix-h-model-cards-and-dependency-registry]] • [[A_World_Burning/00_preprocessing_assay]]
+> [A_World_Burning/34-appendix-c-feature-extraction-inventory](34-appendix-c-feature-extraction-inventory.md) • [A_World_Burning/29-model-library](29-model-library.md) • [A_World_Burning/39-appendix-h-model-cards-and-dependency-registry](39-appendix-h-model-cards-and-dependency-registry.md) • [A_World_Burning/00_preprocessing_assay](00_preprocessing_assay.md)
 
 Measurement is the layer where computational systems are allowed to speak—but only under constraint. Every computed quantity is the output of a sealed run, and every run is an auditable event with declared inputs/outputs, versions, and checksums.
 
@@ -198,7 +198,7 @@ Core feature families include:
 - Segment and tile embeddings (derived from segmentation outputs).
 - Optional text-layer extraction (OCR/layout) and VLM captioning (explicitly labeled).
 
-The exhaustive feature inventory (with storage targets and failure modes) lives in [[A_World_Burning/34-appendix-c-feature-extraction-inventory]].
+The exhaustive feature inventory (with storage targets and failure modes) lives in [A_World_Burning/34-appendix-c-feature-extraction-inventory](34-appendix-c-feature-extraction-inventory.md).
 
 ### VII.2 Run manifests, artifact sealing, and ledger derivation
 
@@ -217,7 +217,7 @@ The authoritative artifacts are run outputs and plate-local manifests; aggregate
 ## VIII. Segmentation Without Semantics (structural decomposition)
 
 > [!note] Primary technical references
-> [[A_World_Burning/35-appendix-d-segmentation-methods-and-parameters]] • [[A_World_Burning/29-model-library]] • [[A_World_Burning/27-strange-models-compendium]]
+> [A_World_Burning/35-appendix-d-segmentation-methods-and-parameters](35-appendix-d-segmentation-methods-and-parameters.md) • [A_World_Burning/29-model-library](29-model-library.md) • [A_World_Burning/27-strange-models-compendium](27-strange-models-compendium.md)
 
 Segmentation is used as an instrument for **making variance measurable**, not as a declaration of meaning. The project uses class-agnostic or weakly constrained segmentation to decompose plates into regions so that measurement can be conducted on parts (birds, text blocks, borders, background fields) without prematurely naming them.
 
@@ -234,14 +234,14 @@ Segmentation runs may emit:
 - Region descriptors (area, bbox, centroid, shape stats).
 - Region-to-plate mapping records (variant-aware).
 
-All segmentation details—including parameters, tiling strategies, post-processing rules, and explicit non-claims—are specified in [[A_World_Burning/35-appendix-d-segmentation-methods-and-parameters]].
+All segmentation details—including parameters, tiling strategies, post-processing rules, and explicit non-claims—are specified in [A_World_Burning/35-appendix-d-segmentation-methods-and-parameters](35-appendix-d-segmentation-methods-and-parameters.md).
 
 ---
 
 ## IX. Reproducible Runs and Epistemic Discipline
 
 > [!note] Primary technical references
-> [[A_World_Burning/36-appendix-e-reproducibility-protocols]] • [[A_World_Burning/33-appendix-b-filesystem-naming-run-ids]]
+> [A_World_Burning/36-appendix-e-reproducibility-protocols](36-appendix-e-reproducibility-protocols.md) • [A_World_Burning/33-appendix-b-filesystem-naming-run-ids](33-appendix-b-filesystem-naming-run-ids.md)
 
 Reproducibility is treated as a methodological discipline rather than an aspirational claim. Runs are sealed; randomness is controlled where possible and logged where not; outputs are append-only; failures are recorded as first-class artifacts.
 
@@ -252,7 +252,7 @@ The key editorial consequence is auditability: a third party must be able to rec
 ## X. Canon Under Stress: The Climate Frame
 
 > [!note] Primary technical references
-> [[A_World_Burning/37-appendix-f-climate-perturbation-regimes]]
+> [A_World_Burning/37-appendix-f-climate-perturbation-regimes](37-appendix-f-climate-perturbation-regimes.md)
 
 The climate layer is not documentary; it is methodological stress. It is defined as a downstream regime of constrained transformations applied to the measured manifold in order to test stability assumptions, model brittleness, and the behavior of canonical systems under controlled instability.
 
@@ -264,7 +264,7 @@ All climate perturbations are parameterized, logged, and explicitly prohibited f
 
 Interpretation begins where the project permits semantic claims, editorial argument, or pixel-transforming operations. These layers are allowed—but only after documentary ingestion and measurement runs are sealed, and only when transformations are labeled and provenance-preserving.
 
-Guardrails and non-claims are defined in [[A_World_Burning/38-appendix-g-ethical-and-interpretive-guardrails]].
+Guardrails and non-claims are defined in [A_World_Burning/38-appendix-g-ethical-and-interpretive-guardrails](38-appendix-g-ethical-and-interpretive-guardrails.md).
 
 ---
 
@@ -280,7 +280,7 @@ This layer depends on the integrity of ingestion, the plurality of instruments, 
 
 Machine learning outputs are admissible only as measured artifacts with documented bias, versioning, and failure modes. No model output is treated as authoritative identity, intent, or truth; it is treated as a constrained measurement that must be compared across instruments and audited against provenance.
 
-Model surface area and licensing constraints are captured in [[A_World_Burning/39-appendix-h-model-cards-and-dependency-registry]].
+Model surface area and licensing constraints are captured in [A_World_Burning/39-appendix-h-model-cards-and-dependency-registry](39-appendix-h-model-cards-and-dependency-registry.md).
 
 ---
 
@@ -294,7 +294,7 @@ This model of canon changes what can be cited: citations point to plate identiti
 
 The storage design is not incidental: it is the mechanism by which canon becomes reconstructible. The system prioritizes immutable evidence, sealed run artifacts, and derived ledgers that can be rebuilt from plate-local truth.
 
-The disk contract and run ID law are specified in [[A_World_Burning/33-appendix-b-filesystem-naming-run-ids]].
+The disk contract and run ID law are specified in [A_World_Burning/33-appendix-b-filesystem-naming-run-ids](33-appendix-b-filesystem-naming-run-ids.md).
 
 ---
 
@@ -307,7 +307,7 @@ Different audiences will encounter different “projections” of the manifold: 
 ## XVII. Failure Modes and Open Problems
 
 > [!note] Primary technical references
-> [[A_World_Burning/40-appendix-i-known-limitations-and-open-questions]]
+> [A_World_Burning/40-appendix-i-known-limitations-and-open-questions](40-appendix-i-known-limitations-and-open-questions.md)
 
 Failure is expected and must be documented. This includes dataset gaps, institutional blind spots, model brittleness, nondeterministic runs, and conceptual risks (e.g., accidental reintroduction of authority via “best-of” defaults).
 
@@ -329,7 +329,7 @@ This project refuses:
 - automated canon formation (“the model says this is the canonical image”),
 - silent overwrites of evidence.
 
-These refusals are formalized in [[A_World_Burning/38-appendix-g-ethical-and-interpretive-guardrails]].
+These refusals are formalized in [A_World_Burning/38-appendix-g-ethical-and-interpretive-guardrails](38-appendix-g-ethical-and-interpretive-guardrails.md).
 
 ---
 
@@ -343,13 +343,13 @@ Canonical digital editions under variance require a shift from single-image auth
 
 These are not optional; they are the paper’s claim to reconstructibility.
 
-- Appendix A: [[A_World_Burning/32-appendix-a-corpus-and-source-registry]]
-- Appendix B: [[A_World_Burning/33-appendix-b-filesystem-naming-run-ids]]
-- Appendix C: [[A_World_Burning/34-appendix-c-feature-extraction-inventory]]
-- Appendix D: [[A_World_Burning/35-appendix-d-segmentation-methods-and-parameters]]
-- Appendix E: [[A_World_Burning/36-appendix-e-reproducibility-protocols]]
-- Appendix F: [[A_World_Burning/37-appendix-f-climate-perturbation-regimes]]
-- Appendix G: [[A_World_Burning/38-appendix-g-ethical-and-interpretive-guardrails]]
-- Appendix H: [[A_World_Burning/39-appendix-h-model-cards-and-dependency-registry]]
-- Appendix I: [[A_World_Burning/40-appendix-i-known-limitations-and-open-questions]]
-- Appendix J: [[A_World_Burning/41-appendix-j-glossary]]
+- Appendix A: [A_World_Burning/32-appendix-a-corpus-and-source-registry](32-appendix-a-corpus-and-source-registry.md)
+- Appendix B: [A_World_Burning/33-appendix-b-filesystem-naming-run-ids](33-appendix-b-filesystem-naming-run-ids.md)
+- Appendix C: [A_World_Burning/34-appendix-c-feature-extraction-inventory](34-appendix-c-feature-extraction-inventory.md)
+- Appendix D: [A_World_Burning/35-appendix-d-segmentation-methods-and-parameters](35-appendix-d-segmentation-methods-and-parameters.md)
+- Appendix E: [A_World_Burning/36-appendix-e-reproducibility-protocols](36-appendix-e-reproducibility-protocols.md)
+- Appendix F: [A_World_Burning/37-appendix-f-climate-perturbation-regimes](37-appendix-f-climate-perturbation-regimes.md)
+- Appendix G: [A_World_Burning/38-appendix-g-ethical-and-interpretive-guardrails](38-appendix-g-ethical-and-interpretive-guardrails.md)
+- Appendix H: [A_World_Burning/39-appendix-h-model-cards-and-dependency-registry](39-appendix-h-model-cards-and-dependency-registry.md)
+- Appendix I: [A_World_Burning/40-appendix-i-known-limitations-and-open-questions](40-appendix-i-known-limitations-and-open-questions.md)
+- Appendix J: [A_World_Burning/41-appendix-j-glossary](41-appendix-j-glossary.md)

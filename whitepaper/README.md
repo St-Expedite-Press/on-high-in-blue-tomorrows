@@ -2,15 +2,15 @@
 
 This folder is the **book/whitepaper root** for _The Burning World_. The goal here is to make the project readable as a single coherent document while preserving the raw materials and technical contracts elsewhere.
 
-**Start here:** [[DRAFT]]
+**Start here:** [DRAFT](DRAFT.md)
 
-**Crosswalk from raw materials → sections:** [[MATERIALS_MAP]]
+**Crosswalk from raw materials -> sections:** [MATERIALS_MAP](MATERIALS_MAP.md)
 
 ---
 
 ## What to read (in order)
 
-- [[DRAFT]] (compiled reading surface)
+- [DRAFT](DRAFT.md) (compiled reading surface)
 - `00-front-matter/introduction.md` (working introduction)
 - `sections/README.md` (I–XX)
 - `appendices/README.md` (A–J)

@@ -4,18 +4,18 @@ This directory is the **single flat workspace** for _The Burning World_: plannin
 
 If you only read a few things, start here:
 
-- Whitepaper seed (intro + ToC): [[whitepaper/White Paper I]] (`..\whitepaper\White Paper I.md`)
-- Whitepaper master outline (executable ToC + appendix pointers): [[26-whitepaper-skeleton]] (`26-whitepaper-skeleton.md`)
-- Whitepaper ToC map (Obsidian-friendly links): [[30-whitepaper-toc]] (`30-whitepaper-toc.md`)
-- Whitepaper compiled draft (paper-shaped, Obsidian-friendly): [[42-whitepaper-draft]] (`42-whitepaper-draft.md`)
-- Preprocessing/extraction inventory (the "do we have everything?" list): [[00_preprocessing_assay]] (`00_preprocessing_assay.md`)
-- Addenda that were discovered later (kept separate to avoid disturbing the main assay): [[00_preprocessing_assay_addendum]] (`00_preprocessing_assay_addendum.md`)
+- Whitepaper seed (intro + ToC): [whitepaper/White Paper I](../whitepaper/White%20Paper%20I.md) (`../whitepaper/White Paper I.md`)
+- Whitepaper master outline (executable ToC + appendix pointers): [26-whitepaper-skeleton](26-whitepaper-skeleton.md) (`26-whitepaper-skeleton.md`)
+- Whitepaper ToC map (clickable links): [30-whitepaper-toc](30-whitepaper-toc.md) (`30-whitepaper-toc.md`)
+- Whitepaper compiled draft (paper-shaped, single-file): [42-whitepaper-draft](42-whitepaper-draft.md) (`42-whitepaper-draft.md`)
+- Preprocessing/extraction inventory (the "do we have everything?" list): [00_preprocessing_assay](00_preprocessing_assay.md) (`00_preprocessing_assay.md`)
+- Addenda that were discovered later (kept separate to avoid disturbing the main assay): [00_preprocessing_assay_addendum](00_preprocessing_assay_addendum.md) (`00_preprocessing_assay_addendum.md`)
 - Filled appendices (paper-ready technical specifications):
-  - Appendix A (corpus + source registry): [[32-appendix-a-corpus-and-source-registry]] (`32-appendix-a-corpus-and-source-registry.md`)
-  - Appendix B (filesystem + run IDs): [[33-appendix-b-filesystem-naming-run-ids]] (`33-appendix-b-filesystem-naming-run-ids.md`)
-  - Appendix C (feature extraction inventory): [[34-appendix-c-feature-extraction-inventory]] (`34-appendix-c-feature-extraction-inventory.md`)
-- Model library (embedding/segmentation registry + alias hygiene): [[29-model-library]] (`29-model-library.md`)
-- Source/variant acquisition discipline (how to go get variants without losing provenance): [[28-sources-and-variant-acquisition]] (`28-sources-and-variant-acquisition.md`)
+  - Appendix A (corpus + source registry): [32-appendix-a-corpus-and-source-registry](32-appendix-a-corpus-and-source-registry.md) (`32-appendix-a-corpus-and-source-registry.md`)
+  - Appendix B (filesystem + run IDs): [33-appendix-b-filesystem-naming-run-ids](33-appendix-b-filesystem-naming-run-ids.md) (`33-appendix-b-filesystem-naming-run-ids.md`)
+  - Appendix C (feature extraction inventory): [34-appendix-c-feature-extraction-inventory](34-appendix-c-feature-extraction-inventory.md) (`34-appendix-c-feature-extraction-inventory.md`)
+- Model library (embedding/segmentation registry + alias hygiene): [29-model-library](29-model-library.md) (`29-model-library.md`)
+- Source/variant acquisition discipline (how to go get variants without losing provenance): [28-sources-and-variant-acquisition](28-sources-and-variant-acquisition.md) (`28-sources-and-variant-acquisition.md`)
 
 ---
 
@@ -36,38 +36,38 @@ There are three “layers” of material:
 
 ## Core Contracts (treat as law)
 
-- [[00_preprocessing_assay]] - exhaustive "what must be acquired/extracted/derived" through preprocessing
-- [[00_preprocessing_assay_addendum]] - no-edit addenda (prompt registry, packaging, schema versioning, security hygiene)
-- [[33-appendix-b-filesystem-naming-run-ids]] - disk ontology, run sealing, naming law, ledger rebuild contract
-- [[28-sources-and-variant-acquisition]] - variant/source registry discipline (variance mode)
-- [[29-model-library]] - model registry + pinning rules + license hygiene
+- [00_preprocessing_assay](00_preprocessing_assay.md) - exhaustive "what must be acquired/extracted/derived" through preprocessing
+- [00_preprocessing_assay_addendum](00_preprocessing_assay_addendum.md) - no-edit addenda (prompt registry, packaging, schema versioning, security hygiene)
+- [33-appendix-b-filesystem-naming-run-ids](33-appendix-b-filesystem-naming-run-ids.md) - disk ontology, run sealing, naming law, ledger rebuild contract
+- [28-sources-and-variant-acquisition](28-sources-and-variant-acquisition.md) - variant/source registry discipline (variance mode)
+- [29-model-library](29-model-library.md) - model registry + pinning rules + license hygiene
 
 ---
 
 ## Whitepaper Materials
 
-- [[whitepaper/White Paper I]] - seed draft (introduction + ToC)
-- [[26-whitepaper-skeleton]] - expanded outline (argument + spec + infrastructure guide)
-- [[30-whitepaper-toc]] - Obsidian-friendly ToC map (links into this directory)
-- [[42-whitepaper-draft]] - compiled, paper-shaped draft (read in one file)
+- [whitepaper/White Paper I](../whitepaper/White%20Paper%20I.md) - seed draft (introduction + ToC)
+- [26-whitepaper-skeleton](26-whitepaper-skeleton.md) - expanded outline (argument + spec + infrastructure guide)
+- [30-whitepaper-toc](30-whitepaper-toc.md) - ToC map (links into this directory)
+- [42-whitepaper-draft](42-whitepaper-draft.md) - compiled, paper-shaped draft (read in one file)
 
 ---
 
 ## Filled Appendices (paper-ready)
 
-- [[32-appendix-a-corpus-and-source-registry]] - Appendix A
-- [[33-appendix-b-filesystem-naming-run-ids]] - Appendix B
-- [[34-appendix-c-feature-extraction-inventory]] - Appendix C
+- [32-appendix-a-corpus-and-source-registry](32-appendix-a-corpus-and-source-registry.md) - Appendix A
+- [33-appendix-b-filesystem-naming-run-ids](33-appendix-b-filesystem-naming-run-ids.md) - Appendix B
+- [34-appendix-c-feature-extraction-inventory](34-appendix-c-feature-extraction-inventory.md) - Appendix C
 
 ## Drafted Appendices (D-J; ready to expand)
 
-- [[35-appendix-d-segmentation-methods-and-parameters]] - Appendix D
-- [[36-appendix-e-reproducibility-protocols]] - Appendix E
-- [[37-appendix-f-climate-perturbation-regimes]] - Appendix F
-- [[38-appendix-g-ethical-and-interpretive-guardrails]] - Appendix G
-- [[39-appendix-h-model-cards-and-dependency-registry]] - Appendix H
-- [[40-appendix-i-known-limitations-and-open-questions]] - Appendix I
-- [[41-appendix-j-glossary]] - Appendix J
+- [35-appendix-d-segmentation-methods-and-parameters](35-appendix-d-segmentation-methods-and-parameters.md) - Appendix D
+- [36-appendix-e-reproducibility-protocols](36-appendix-e-reproducibility-protocols.md) - Appendix E
+- [37-appendix-f-climate-perturbation-regimes](37-appendix-f-climate-perturbation-regimes.md) - Appendix F
+- [38-appendix-g-ethical-and-interpretive-guardrails](38-appendix-g-ethical-and-interpretive-guardrails.md) - Appendix G
+- [39-appendix-h-model-cards-and-dependency-registry](39-appendix-h-model-cards-and-dependency-registry.md) - Appendix H
+- [40-appendix-i-known-limitations-and-open-questions](40-appendix-i-known-limitations-and-open-questions.md) - Appendix I
+- [41-appendix-j-glossary](41-appendix-j-glossary.md) - Appendix J
 
 ---
 
@@ -97,7 +97,7 @@ Next safe computation:
 
 ## Ontology Work
 
-- OWL sketch (planning, no serialization): [[43-owl-ontology-sketch]] (`43-owl-ontology-sketch.md`)
+- OWL sketch (planning, no serialization): [43-owl-ontology-sketch](43-owl-ontology-sketch.md) (`43-owl-ontology-sketch.md`)
 
 ---
 
@@ -105,15 +105,15 @@ Next safe computation:
 
 These are the “concept development archive”. They are not obsolete; they are provenance for the project’s conceptual evolution:
 
-- Architecture + planning: [[01_audubon_dual_ledger]], [[02_first_extract_plan]], [[07_the_evolving_data_plan]], [[23-phases-and-schedules]]
-- Models + workflows: [[04_sane_model_roster]], [[05_cost_optimization]], [[06_faster_cheaper_shittier_maybe_better]], [[21-more-on-the-model-thing]], [[24-etiquette]]
-- "Strange" embeddings + probes: [[14-strangest-of-embeddings]], [[27-strange-models-compendium]]
-- Big picture / publication framing: [[19-the-big-one]], [[20-a-real-paper]], [[25-reel-it-in]]
-- Sources/bibliography: [[31-sources-and-instruments-bibliography]]
+- Architecture + planning: [01_audubon_dual_ledger](01_audubon_dual_ledger.md), [02_first_extract_plan](02_first_extract_plan.md), [07_the_evolving_data_plan](07_the_evolving_data_plan.md), [23-phases-and-schedules](23-phases-and-schedules.md)
+- Models + workflows: [04_sane_model_roster](04_sane_model_roster.md), [05_cost_optimization](05_cost_optimization.md), [06_faster_cheaper_shittier_maybe_better](06_faster_cheaper_shittier_maybe_better.md), [21-more-on-the-model-thing](21-more-on-the-model-thing.md), [24-etiquette](24-etiquette.md)
+- "Strange" embeddings + probes: [14-strangest-of-embeddings](14-strangest-of-embeddings.md), [27-strange-models-compendium](27-strange-models-compendium.md)
+- Big picture / publication framing: [19-the-big-one](19-the-big-one.md), [20-a-real-paper](20-a-real-paper.md), [25-reel-it-in](25-reel-it-in.md)
+- Sources/bibliography: [31-sources-and-instruments-bibliography](31-sources-and-instruments-bibliography.md)
 
 ---
 
-## Obsidian Rendering Notes (practical)
+## Optional: Obsidian Notes (practical)
 
 - Keep code fenced (```python / ```json / etc.) so it doesn’t turn into headings.
 - Prefer markdown tables with explicit header separators; Appendices A–C and the model library follow this.
