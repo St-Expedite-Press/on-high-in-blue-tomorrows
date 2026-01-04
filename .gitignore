@@ -38,3 +38,5 @@
 .DS_Store
 Thumbs.db
 notebooks/.ipynb_checkpoints/
+**/__pycache__/
+*.pyc
