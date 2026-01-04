@@ -127,3 +127,44 @@ Recommended key:
 Recommended key:
 
 - `(run_id, plate_id, segment_id)`
+
+---
+
+## CPU Baseline Artifact (`cpu_baseline.json`)
+
+Location: `plates_structured/<plate_id>/runs/<run_id>/cpu_baseline.json`
+
+Writers:
+
+- Notebook: `notebooks/cpu_baseline_sagemaker_style.ipynb`
+- CLI job: `python -m pipeline.sagemaker.cpu_baseline_job ...`
+
+Purpose:
+
+- Cheap, reproducible, non-ML features for QC, drift detection, and provenance-first comparisons.
+
+Key fields:
+
+- `plate_id`, `run_id`, `timestamp`, `source_image`
+- `source_file` (bytes, extension/format, sha256)
+- `geometry` (width/height/megapixels/aspect ratio/mode)
+- `tiling` (tile_size_px + computed tile counts; informational)
+- `pixel_stats` (histograms + derived stats, entropy, Laplacian variance)
+- `hashes` (`ahash`, `dhash`, `phash`)
+
+---
+
+## Segmentation Artifacts (planned v0)
+
+Location:
+
+- `plates_structured/<plate_id>/runs/<run_id>/segmentation.json`
+- `plates_structured/<plate_id>/runs/<run_id>/segmentation_mask.png`
+
+Writer (v0):
+
+- `python -m pipeline.sagemaker.segmentation_otsu_job ...` (cheap, CPU-only baseline segmentation)
+
+Notes:
+
+- This segmentation is a measurement-layer artifact: derived, append-only, and never overwrites sources.

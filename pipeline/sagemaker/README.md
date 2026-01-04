@@ -23,12 +23,20 @@ This folder is a minimal scaffold for running repo-aligned jobs on SageMaker whi
 - A new tree rooted at `--output-root` containing:
   - `plates_structured/plate-###/runs/<run_id>/metrics.json`
   - `plates_structured/plate-###/runs/<run_id>/cpu_baseline.json`
+  - `plates_structured/plate-###/runs/<run_id>/segmentation.json`
+  - `plates_structured/plate-###/runs/<run_id>/segmentation_mask.png`
   - `reports/<run_id>/report.json`
 
 ## Local Run
 
 ```
 python cpu_baseline_job.py --dataset-root /path/to/dataset --output-root /tmp/bws-out --shard-index 0 --shard-count 1
+```
+
+Cheap segmentation (Otsu luma threshold; downsampled mask):
+
+```
+python segmentation_otsu_job.py --dataset-root /path/to/dataset --output-root /tmp/bws-out --shard-index 0 --shard-count 1 --max-dim 1024
 ```
 
 ## SageMaker Processing Mapping
@@ -41,4 +49,3 @@ Invoke:
 ```
 python cpu_baseline_job.py --dataset-root /opt/ml/processing/input --output-root /opt/ml/processing/output --shard-index 0 --shard-count 10 --run-id run-...
 ```
-
