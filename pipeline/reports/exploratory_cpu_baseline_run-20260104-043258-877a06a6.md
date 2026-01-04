@@ -12,7 +12,7 @@ This exploratory run generated a “CPU baseline” feature bundle per plate:
 - Histogram-based pixel stats for RGB and luma (min/max/mean/std)
 - Entropy estimates per channel
 - Clipping ratios at 0 and 255 (luma)
-- Laplacian variance (blur / detail proxy)
+- Laplacian variance (blur/detail proxy)
 - Perceptual hashes (`ahash`, `dhash`, `phash`)
 - Run manifests (`metrics.json`) + a run report (`report.json`)
 
@@ -43,20 +43,20 @@ Notable: highlight clipping is widespread in this corpus (very high `clip_L_high
 
 ### 1) Report field name mismatch (`input_root` vs `dataset_root`)
 
-- The run’s `report.json` uses `input_root`, while `pipeline/sagemaker/cpu_baseline_job.py` uses `dataset_root`.
-- Root cause: “Run All” was executed in `notebooks/cpu_baseline_sagemaker_style.ipynb`, which writes `input_root` by design (environment-first notebook contract).
+- The run’s `report.json` used `input_root`, while `pipeline/sagemaker/cpu_baseline_job.py` used `dataset_root`.
+- Root cause: “Run All” was executed in `notebooks/cpu_baseline_sagemaker_style.ipynb`, which used `input_root` by design (environment-first notebook contract).
 
 Mitigation applied:
 
-- Updated `notebooks/cpu_baseline_sagemaker_style.ipynb` to write both keys (`dataset_root` and `input_root`) with the same value so downstream tooling can standardize on `dataset_root` without breaking notebook semantics.
+- Standardized on `dataset_root` and kept `input_root` as an alias across both notebook and CLI paths.
 
 ### 2) Highlight clipping is prevalent
 
-This is likely a property of digitization pipelines (scanner exposure / background / paper glare / whitening) rather than a “bug” in our run. But it matters because it can:
+This is likely a property of digitization pipelines (scanner exposure/background/paper glare/whitening) rather than a bug in our run. It matters because it can:
 
 - distort downstream embeddings/segmentation (especially for white backgrounds and faint linework),
 - confound comparisons across institutions (different tone curves),
-- inflate false similarity for “washed out” plates.
+- inflate false similarity for washed-out plates.
 
 Examples with extreme highlight clipping:
 
@@ -88,16 +88,16 @@ Interpretation:
 
 ### Standardize run metadata fields
 
-- Choose `dataset_root` as the canonical report key.
+- Keep `dataset_root` as the canonical report key.
 - Keep `input_root` as an alias for notebook-style execution environments.
-- Add a tiny “report normalizer” step in downstream tooling (if present) that maps old keys to new keys.
+- Add a tiny report normalizer step for older runs if needed.
 
 ### Tone / clipping robustness
 
-Options (in increasing “interpretive” intensity):
+Options (in increasing interpretive intensity):
 
 - Record color-management signals (ICC presence/hash, EXIF presence, JPEG subsampling/quantization) to explain variance sources.
-- Add a “normalized-luma” representation (e.g., percentile-based contrast normalization) for downstream embeddings *as a derived artifact*, never overwriting sources.
+- Add a normalized-luma representation (e.g., percentile-based contrast normalization) for downstream embeddings as a derived artifact, never overwriting sources.
 - Add detection + routing: plates with extreme clipping go through a separate measurement branch with extra warnings and different parameters.
 
 ### Better duplicate / near-duplicate detection
@@ -115,16 +115,12 @@ Without adding ML inference, we can still add cheap, reproducible, interpretable
 
 ## What Else There Is To Do Next
 
-If we’re happy with this exploratory run, the next “useful” steps are:
+If we’re happy with this exploratory baseline, the next useful steps are:
 
-1. Write a small aggregator to produce a single QC table (CSV/Parquet) from all `cpu_baseline.json`.
-2. Add pHash near-duplicate clustering + an “inspection list” export.
-3. Formalize thresholds/guardrails (e.g., what counts as “too clipped”, “too blurry”, “too small”, “too anomalous”) and how that affects downstream runs.
-4. Decide whether to treat tone normalization as a separate downstream “interpretation layer” artifact (recommended) vs part of measurement (risky).
-
-## Conclusion
-
-This exploratory run is a success operationally (all plates processed, no schema/decode failures) and already reveals meaningful variance signals (especially highlight clipping). The issues surfaced are mostly about (a) standardizing metadata fields across execution environments and (b) deciding how to handle tone/clipping variance in a provenance-safe way.
+1. Write an aggregator to produce a single QC table (CSV/Parquet) from all `cpu_baseline.json`.
+2. Add pHash near-duplicate clustering + an inspection list export.
+3. Formalize thresholds/guardrails (“too clipped”, “too blurry”, “too small”, “too anomalous”) and how they affect downstream runs.
+4. Decide whether to treat tone normalization as a separate downstream interpretation-layer artifact (recommended) vs part of measurement (risky).
 
 ## Note: What “Clipping” Means Here
 
@@ -142,56 +138,6 @@ Why this matters:
 - Once clipping happens, information is irreversibly lost; you can’t recover detail that was never recorded.
 - That makes clipping a measurement/provenance concern (comparability across institutions), not an aesthetic one.
 
+## Conclusion
 
-
-
-Report Ammended:
-
-Clipping is what happens when image data hits the **hard limits of a representable range** and everything beyond those limits gets collapsed to a single value.
-
-In digital images, most pixel values live in a fixed numeric range. For 8-bit images, that range is 0–255. Anything darker than 0 becomes 0. Anything brighter than 255 becomes 255. When a significant number of pixels pile up at either extreme, you have clipping.
-
-There are two kinds, and they behave differently.
-
-Highlight clipping
-This is when bright areas are pushed up to the maximum value (255 for 8-bit). Once clipped, differences between “very bright” and “extremely bright” are gone. Paper texture, faint lines, light washes, and subtle shading disappear into flat white. In histograms, this shows up as a spike at the high end.
-
-In your run, the very high `clip_L_high_ratio` means a large fraction of pixels are pegged at maximum luma. That strongly suggests scanner exposure, aggressive background whitening, or tone-curve normalization during digitization—not something intrinsic to Audubon’s plates.
-
-Shadow clipping
-This is the opposite: dark areas collapse to 0. Detail in shadows is lost. In your data, this is rare, which implies the digitization pipelines prioritized preserving dark ink and linework while sacrificing highlight nuance.
-
-Why clipping matters
-Once clipping happens, information is **irreversibly lost**. No downstream method—ML, diffusion, enhancement—can recover detail that was never recorded. You can hallucinate, but you cannot reconstruct.
-
-That’s why clipping is not an aesthetic issue; it’s a measurement and provenance issue.
-
-Why you measured it in the baseline
-Your CPU baseline doesn’t try to “fix” clipping. It only detects and quantifies it. That’s exactly right.
-
-Clipping ratios answer questions like:
-
-* How much of this image is already saturated?
-* Are two scans comparable, or does one have a radically different tone ceiling?
-* Should this plate be routed differently downstream?
-
-In your pipeline, clipping is a **routing signal**, not a verdict.
-
-A key distinction
-Clipping is not the same as “brightness” or “contrast.”
-
-An image can be bright without clipping if detail is preserved near white. An image can be high-contrast without clipping if the full range is used smoothly. Clipping is specifically about **hitting the ceiling or floor and flattening detail**.
-
-Why highlight clipping is common in cultural heritage scans
-Institutions often optimize for:
-
-* legibility of dark marks,
-* clean white backgrounds for print/web,
-* consistency across plates.
-
-Those goals systematically push highlights into clipping. From an archival standpoint, this is understandable. From a measurement and ML standpoint, it introduces bias.
-
-Your baseline run surfaced that bias without correcting it. That’s the correct order of operations.
-
-In short:
-Clipping is the point where the measuring instrument stops measuring and starts flattening reality. Your work is about detecting where that happens before anyone pretends the data is neutral.
+This exploratory run is a success operationally (all plates processed, no schema/decode failures) and already reveals meaningful variance signals (especially highlight clipping). The key next step is to use these signals to route and compare future runs without overwriting the core dataset.
