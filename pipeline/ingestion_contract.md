@@ -7,7 +7,10 @@ This document defines the minimum, failure-intolerant rules for ingesting and me
 - run outputs are discoverable and verifiable,
 - downstream interpretation never contaminates the core dataset.
 
-See also: `GOVERNANCE_CHECKLIST.md`
+See also:
+
+- `GOVERNANCE_CHECKLIST.md`
+- `pipeline/ingestion_contract_legacy.md` (prior long-form draft preserved for reference)
 
 ---
 
@@ -114,4 +117,3 @@ Each derived artifact must carry enough provenance to reproduce and audit it:
 - code version/hash (recorded either inside the artifact or in `report.json`)
 
 No new tooling is required to enforce this; it is a required field set.
-
