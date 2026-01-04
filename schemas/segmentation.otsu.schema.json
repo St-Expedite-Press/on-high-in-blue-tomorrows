@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://burning-world-series/schemas/segmentation.otsu.schema.json",
+  "title": "Segmentation (Otsu Luma, v1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "plate_id",
+    "run_id",
+    "timestamp",
+    "source_image",
+    "method",
+    "params",
+    "original_geometry",
+    "mask_geometry",
+    "outputs",
+    "foreground_ratio"
+  ],
+  "properties": {
+    "plate_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "source_image": {
+      "type": "string"
+    },
+    "method": {
+      "type": "string"
+    },
+    "params": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "max_dim",
+        "threshold",
+        "polarity"
+      ],
+      "properties": {
+        "max_dim": {
+          "type": "integer"
+        },
+        "threshold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "polarity": {
+          "type": "string"
+        }
+      }
+    },
+    "original_geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "width_px",
+        "height_px"
+      ],
+      "properties": {
+        "width_px": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height_px": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "mask_geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "width_px",
+        "height_px"
+      ],
+      "properties": {
+        "width_px": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height_px": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mask_png"
+      ],
+      "properties": {
+        "mask_png": {
+          "type": "string"
+        }
+      }
+    },
+    "foreground_ratio": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    }
+  }
+}

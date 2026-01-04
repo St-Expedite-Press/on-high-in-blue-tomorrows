@@ -14,6 +14,8 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+python -m pipeline.tools.sync_schemas --dataset-root $DatasetRoot
+
 $argsList = @(
   "-m", "pipeline.sagemaker.segmentation_otsu_job",
   "--dataset-root", $DatasetRoot,
@@ -31,4 +33,3 @@ if ($SkipIfPresent) {
 }
 
 python @argsList
-

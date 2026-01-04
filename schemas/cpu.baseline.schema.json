@@ -1,0 +1,329 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://burning-world-series/schemas/cpu.baseline.schema.json",
+  "title": "CPU Baseline Feature Pack",
+  "type": "object",
+  "required": [
+    "plate_id",
+    "run_id",
+    "timestamp",
+    "source_image",
+    "source_file",
+    "geometry",
+    "tiling",
+    "decode"
+  ],
+  "properties": {
+    "plate_id": {
+      "type": "string",
+      "pattern": "^plate-[0-9]{3}$"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_image": {
+      "type": "string"
+    },
+    "source_file": {
+      "type": "object",
+      "required": [
+        "bytes",
+        "extension",
+        "format",
+        "sha256",
+        "exif_present",
+        "icc_present",
+        "icc_hash",
+        "jpeg_is_progressive",
+        "jpeg_subsampling",
+        "jpeg_quant_hash"
+      ],
+      "properties": {
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "extension": {
+          "type": "string"
+        },
+        "format": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "exif_present": {
+          "type": "boolean"
+        },
+        "icc_present": {
+          "type": "boolean"
+        },
+        "icc_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "jpeg_is_progressive": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "jpeg_subsampling": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "jpeg_quant_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "geometry": {
+      "type": "object",
+      "required": [
+        "width_px",
+        "height_px",
+        "megapixels",
+        "aspect_ratio",
+        "mode"
+      ],
+      "properties": {
+        "width_px": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "height_px": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "megapixels": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "aspect_ratio": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "mode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "tiling": {
+      "type": "object",
+      "required": [
+        "tile_size_px",
+        "tiles_x",
+        "tiles_y",
+        "total_tiles"
+      ],
+      "properties": {
+        "tile_size_px": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "tiles_x": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "tiles_y": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "total_tiles": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "decode": {
+      "type": "object",
+      "required": [
+        "ok",
+        "error"
+      ],
+      "properties": {
+        "ok": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "pixel_stats": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "colorspace": {
+          "type": "string"
+        },
+        "rgb_histograms": {
+          "type": "object",
+          "required": [
+            "bins",
+            "R",
+            "G",
+            "B"
+          ],
+          "properties": {
+            "bins": {
+              "type": "integer"
+            },
+            "R": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "minItems": 256,
+              "maxItems": 256
+            },
+            "G": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "minItems": 256,
+              "maxItems": 256
+            },
+            "B": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "minItems": 256,
+              "maxItems": 256
+            }
+          },
+          "additionalProperties": false
+        },
+        "l_histogram": {
+          "type": "object",
+          "required": [
+            "bins",
+            "L"
+          ],
+          "properties": {
+            "bins": {
+              "type": "integer"
+            },
+            "L": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "minItems": 256,
+              "maxItems": 256
+            }
+          },
+          "additionalProperties": false
+        },
+        "rgb_stats": {
+          "type": "object"
+        },
+        "luma_stats": {
+          "type": "object"
+        },
+        "entropy": {
+          "type": "object",
+          "required": [
+            "R",
+            "G",
+            "B",
+            "L"
+          ],
+          "properties": {
+            "R": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "G": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "B": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "L": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "laplacian_var": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "hashes": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "ahash": {
+          "type": "string"
+        },
+        "dhash": {
+          "type": "string"
+        },
+        "phash": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://burning-world-series/schemas/run.manifest.schema.json",
+  "title": "Plate Run Manifest",
+  "type": "object",
+  "required": [
+    "run_id",
+    "plate_id",
+    "timestamp",
+    "models",
+    "outputs"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "plate_id": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

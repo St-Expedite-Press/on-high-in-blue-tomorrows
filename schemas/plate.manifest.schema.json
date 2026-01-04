@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://burning-world-series/schemas/plate.manifest.schema.json",
+  "title": "Audubon Plate Manifest",
+  "type": "object",
+  "required": [
+    "plate_id",
+    "plate_number",
+    "title",
+    "slug",
+    "source_image"
+  ],
+  "properties": {
+    "plate_id": {
+      "type": "string",
+      "pattern": "^plate-[0-9]{3}$"
+    },
+    "plate_number": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 435
+    },
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "source_image": {
+      "type": "string"
+    },
+    "download_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "license": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

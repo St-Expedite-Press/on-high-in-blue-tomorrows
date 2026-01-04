@@ -16,7 +16,9 @@ This folder is a minimal scaffold for running repo-aligned jobs on SageMaker whi
 
 ## Inputs
 
-- A local dataset root containing `plates_structured/` and `schemas/`
+- A local dataset root containing `plates_structured/`
+- Schemas are loaded from `<DATASET_ROOT>/schemas/` when present, otherwise from repo `schemas/`.
+- To sync repo schemas into a dataset root: `python -m pipeline.tools.sync_schemas --dataset-root <DATASET_ROOT>`
 
 ## Outputs
 

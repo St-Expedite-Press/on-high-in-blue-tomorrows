@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import math
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -31,6 +32,10 @@ def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
         for chunk in iter(lambda: f.read(chunk_size), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def sha256_bytes(value: bytes) -> str:
+    return hashlib.sha256(value).hexdigest()
 
 
 def generate_run_id(models: list[str], note: str) -> str:
@@ -145,11 +150,33 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
     p.add_argument("--dataset-root", type=Path, required=True)
     p.add_argument("--output-root", type=Path, required=True)
+    p.add_argument(
+        "--schemas-root",
+        type=Path,
+        default=None,
+        help="Defaults to <DATASET_ROOT>/schemas; falls back to <repo>/schemas.",
+    )
     p.add_argument("--shard-index", type=int, default=0)
     p.add_argument("--shard-count", type=int, default=1)
     p.add_argument("--run-id", type=str, default=None)
     p.add_argument("--skip-if-present", action="store_true")
     return p.parse_args()
+
+
+def repo_root() -> Path:
+    return Path(__file__).resolve().parents[2]
+
+
+def resolve_schemas_root(dataset_root: Path, override: Path | None) -> Path:
+    if override is not None:
+        return override
+    candidate = dataset_root / "schemas"
+    if candidate.exists():
+        return candidate
+    fallback = repo_root() / "schemas"
+    if fallback.exists():
+        return fallback
+    raise SystemExit(f"Missing schemas: {candidate} (and no repo fallback at {fallback})")
 
 
 def main() -> int:
@@ -158,16 +185,17 @@ def main() -> int:
     output_root: Path = args.output_root
 
     plates_root = dataset_root / "plates_structured"
-    schemas_root = dataset_root / "schemas"
+    schemas_root = resolve_schemas_root(dataset_root, args.schemas_root)
 
     if not plates_root.exists():
         raise SystemExit(f"Missing plates_structured: {plates_root}")
-    if not schemas_root.exists():
-        raise SystemExit(f"Missing schemas: {schemas_root}")
 
-    plate_schema = load_schema(schemas_root / "plate.manifest.schema.json")
-    run_schema = load_schema(schemas_root / "run.manifest.schema.json")
+    plate_schema_path = schemas_root / "plate.manifest.schema.json"
+    run_schema_path = schemas_root / "run.manifest.schema.json"
     cpu_schema_path = schemas_root / "cpu.baseline.schema.json"
+
+    plate_schema = load_schema(plate_schema_path)
+    run_schema = load_schema(run_schema_path)
     cpu_schema = load_schema(cpu_schema_path) if cpu_schema_path.exists() else None
 
     plates = sorted([p for p in plates_root.iterdir() if p.is_dir() and p.name.startswith("plate-")])
@@ -185,6 +213,14 @@ def main() -> int:
         "dataset_root": str(dataset_root),
         "input_root": str(dataset_root),
         "output_root": str(output_root),
+        "schemas_root": str(schemas_root),
+        "schemas": {
+            "plate.manifest.schema.json": {"source": str(plate_schema_path), "sha256": sha256_file(plate_schema_path)},
+            "run.manifest.schema.json": {"source": str(run_schema_path), "sha256": sha256_file(run_schema_path)},
+            "cpu.baseline.schema.json": (
+                {"source": str(cpu_schema_path), "sha256": sha256_file(cpu_schema_path)} if cpu_schema_path.exists() else None
+            ),
+        },
         "shard_index": args.shard_index,
         "shard_count": args.shard_count,
         "plates_total": len(plates),
@@ -195,6 +231,13 @@ def main() -> int:
         "schema_failures": 0,
         "errors_sample": [],
     }
+
+    reports_dir = output_root / "reports" / run_id
+    (reports_dir / "schemas").mkdir(parents=True, exist_ok=True)
+    shutil.copy2(plate_schema_path, reports_dir / "schemas" / plate_schema_path.name)
+    shutil.copy2(run_schema_path, reports_dir / "schemas" / run_schema_path.name)
+    if cpu_schema_path.exists():
+        shutil.copy2(cpu_schema_path, reports_dir / "schemas" / cpu_schema_path.name)
 
     for plate_dir in tqdm(selected, desc="plates"):
         manifest_path = plate_dir / "manifest.json"
@@ -248,6 +291,12 @@ def main() -> int:
                 "extension": src_path.suffix.lower().lstrip("."),
                 "format": None,
                 "sha256": sha256_file(src_path),
+                "exif_present": False,
+                "icc_present": False,
+                "icc_hash": None,
+                "jpeg_is_progressive": None,
+                "jpeg_subsampling": None,
+                "jpeg_quant_hash": None,
             },
             "geometry": {"width_px": None, "height_px": None, "megapixels": None, "aspect_ratio": None, "mode": None},
             "tiling": {"tile_size_px": TILE_SIZE, "tiles_x": 1, "tiles_y": 1, "total_tiles": 1},
@@ -259,6 +308,28 @@ def main() -> int:
         try:
             with Image.open(src_path) as img:
                 baseline["source_file"]["format"] = img.format
+
+                try:
+                    baseline["source_file"]["exif_present"] = bool(img.getexif())
+                except Exception:
+                    baseline["source_file"]["exif_present"] = bool(img.info.get("exif"))
+
+                icc = img.info.get("icc_profile")
+                baseline["source_file"]["icc_present"] = icc is not None
+                baseline["source_file"]["icc_hash"] = sha256_bytes(icc) if isinstance(icc, (bytes, bytearray)) else None
+
+                if (img.format or "").upper() == "JPEG":
+                    progressive = img.info.get("progressive")
+                    baseline["source_file"]["jpeg_is_progressive"] = bool(progressive) if progressive is not None else None
+
+                    subsampling = img.info.get("subsampling") or img.info.get("sampling")
+                    baseline["source_file"]["jpeg_subsampling"] = str(subsampling) if subsampling is not None else None
+
+                    quant = getattr(img, "quantization", None)
+                    if isinstance(quant, dict) and quant:
+                        payload = json.dumps(quant, sort_keys=True, separators=(",", ":")).encode("utf-8")
+                        baseline["source_file"]["jpeg_quant_hash"] = sha256_bytes(payload)
+
                 w, h = img.size
                 baseline["geometry"] = {
                     "width_px": int(w),
@@ -310,8 +381,6 @@ def main() -> int:
         out_cpu.write_text(json.dumps(baseline, indent=2), encoding="utf-8")
         report["plates_processed"] += 1
 
-    reports_dir = output_root / "reports" / run_id
-    reports_dir.mkdir(parents=True, exist_ok=True)
     (reports_dir / "report.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(json.dumps(report, indent=2))
     return 0

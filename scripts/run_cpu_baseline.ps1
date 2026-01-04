@@ -13,6 +13,8 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+python -m pipeline.tools.sync_schemas --dataset-root $DatasetRoot
+
 $argsList = @(
   "-m", "pipeline.sagemaker.cpu_baseline_job",
   "--dataset-root", $DatasetRoot,
@@ -29,4 +31,3 @@ if ($SkipIfPresent) {
 }
 
 python @argsList
-

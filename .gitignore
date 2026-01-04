@@ -24,6 +24,8 @@
 !notebooks/**
 !scripts/
 !scripts/**
+!schemas/
+!schemas/**
 
 # Allow common repo metadata if added later
 !.github/

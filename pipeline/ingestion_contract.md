@@ -38,7 +38,8 @@ See also:
 
 ## 3. Schema Authority
 
-- Schemas are authoritative in-repo (versioned).
+- Schemas are authoritative in-repo under `schemas/` (versioned).
+- Dataset roots may contain a copy under `<DATASET_ROOT>/schemas/` (kept in sync from the repo source via `python -m pipeline.tools.sync_schemas ...`).
 - Jobs/notebooks may copy schemas into run outputs for self-description but must not originate or modify schemas there.
 - Any schema copied into a run output must reference the repo version/hash.
 
@@ -51,7 +52,7 @@ Input dataset root (read-only):
 ```
 <DATASET_ROOT>/
   data.json
-  schemas/
+  schemas/                      # copied from repo `schemas/` for validation
     plate.manifest.schema.json
     run.manifest.schema.json
     ...

@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -84,8 +85,38 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--shard-count", type=int, default=1)
     p.add_argument("--run-id", type=str, default=None)
     p.add_argument("--max-dim", type=int, default=DEFAULT_MAX_DIM)
+    p.add_argument(
+        "--schemas-root",
+        type=Path,
+        default=None,
+        help="Defaults to <DATASET_ROOT>/schemas; falls back to <repo>/schemas.",
+    )
     p.add_argument("--skip-if-present", action="store_true")
     return p.parse_args()
+
+
+def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(chunk_size), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def repo_root() -> Path:
+    return Path(__file__).resolve().parents[2]
+
+
+def resolve_schemas_root(dataset_root: Path, override: Path | None) -> Path:
+    if override is not None:
+        return override
+    candidate = dataset_root / "schemas"
+    if candidate.exists():
+        return candidate
+    fallback = repo_root() / "schemas"
+    if fallback.exists():
+        return fallback
+    raise SystemExit(f"Missing schemas: {candidate} (and no repo fallback at {fallback})")
 
 
 def main() -> int:
@@ -94,16 +125,17 @@ def main() -> int:
     output_root: Path = args.output_root
 
     plates_root = dataset_root / "plates_structured"
-    schemas_root = dataset_root / "schemas"
+    schemas_root = resolve_schemas_root(dataset_root, args.schemas_root)
 
     if not plates_root.exists():
         raise SystemExit(f"Missing plates_structured: {plates_root}")
-    if not schemas_root.exists():
-        raise SystemExit(f"Missing schemas: {schemas_root}")
 
-    plate_schema = load_schema(schemas_root / "plate.manifest.schema.json")
-    run_schema = load_schema(schemas_root / "run.manifest.schema.json")
+    plate_schema_path = schemas_root / "plate.manifest.schema.json"
+    run_schema_path = schemas_root / "run.manifest.schema.json"
     seg_schema_path = schemas_root / "segmentation.otsu.schema.json"
+
+    plate_schema = load_schema(plate_schema_path)
+    run_schema = load_schema(run_schema_path)
     seg_schema = load_schema(seg_schema_path) if seg_schema_path.exists() else None
 
     plates = sorted([p for p in plates_root.iterdir() if p.is_dir() and p.name.startswith("plate-")])
@@ -122,6 +154,14 @@ def main() -> int:
         "dataset_root": str(dataset_root),
         "input_root": str(dataset_root),
         "output_root": str(output_root),
+        "schemas_root": str(schemas_root),
+        "schemas": {
+            "plate.manifest.schema.json": {"source": str(plate_schema_path), "sha256": sha256_file(plate_schema_path)},
+            "run.manifest.schema.json": {"source": str(run_schema_path), "sha256": sha256_file(run_schema_path)},
+            "segmentation.otsu.schema.json": (
+                {"source": str(seg_schema_path), "sha256": sha256_file(seg_schema_path)} if seg_schema_path.exists() else None
+            ),
+        },
         "shard_index": args.shard_index,
         "shard_count": args.shard_count,
         "plates_total": len(plates),
@@ -132,6 +172,13 @@ def main() -> int:
         "schema_failures": 0,
         "errors_sample": [],
     }
+
+    reports_dir = output_root / "reports" / run_id
+    (reports_dir / "schemas").mkdir(parents=True, exist_ok=True)
+    shutil.copy2(plate_schema_path, reports_dir / "schemas" / plate_schema_path.name)
+    shutil.copy2(run_schema_path, reports_dir / "schemas" / run_schema_path.name)
+    if seg_schema_path.exists():
+        shutil.copy2(seg_schema_path, reports_dir / "schemas" / seg_schema_path.name)
 
     for plate_dir in tqdm(selected, desc="plates"):
         manifest_path = plate_dir / "manifest.json"
@@ -227,8 +274,6 @@ def main() -> int:
         out_seg.write_text(json.dumps(seg, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         report["plates_processed"] += 1
 
-    reports_dir = output_root / "reports" / run_id
-    reports_dir.mkdir(parents=True, exist_ok=True)
     (reports_dir / "report.json").write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2))
     return 0
@@ -236,4 +281,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

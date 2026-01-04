@@ -88,6 +88,7 @@ We observed one exact aHash collision:
 Interpretation:
 
 - This does not necessarily mean duplicates; aHash is low-resolution and can collide for visually similar plates or similar framing/background.
+- In this case, `dhash` and `phash` differ between the two plates, and the exact file `sha256` differs, so this is best treated as a "cheap similarity hint," not evidence of duplication.
 
 ## How These Issues Might Be Addressed (Future Work)
 

@@ -1,8 +1,8 @@
-﻿# Starting to Look Real Formal (Filesystem + Graph Contract)
+# Starting to Look Real Formal (Filesystem + Graph Contract)
 
-Below is a **production-grade, failure-intolerant filesystem + graph ingestion contract** designed to support **Amazon Neptune as the canonical knowledge graph**, with **brutal rejection rules** and **provable lineage** from pixel ΓåÆ embedding ΓåÆ interpretation.
+Below is a **production-grade, failure-intolerant filesystem + graph ingestion contract** designed to support **Amazon Neptune as the canonical knowledge graph**, with **brutal rejection rules** and **provable lineage** from pixel -> embedding -> interpretation.
 
-This is written as if it were going to be audited by a museum, a journal, or a federal archive. Nothing hand-wavy. Nothing ΓÇ£best effort.ΓÇ¥
+This is written as if it were going to be audited by a museum, a journal, or a federal archive. Nothing hand-wavy. Nothing "best effort."
 
 ---
 
@@ -39,7 +39,7 @@ This is written as if it were going to be audited by a museum, a journal, or a f
     Corrections are new runs.
     
 5. **Every node in Neptune must be traceable to a file path.**  
-    If it canΓÇÖt be reverse-resolved to disk ΓåÆ it doesnΓÇÖt exist.
+    If it can't be reverse-resolved to disk -> it doesn't exist.
     
 
 ---
@@ -48,72 +48,71 @@ This is written as if it were going to be audited by a museum, a journal, or a f
 
 ```
 burning-world-series/
-Γöé
-Γö£ΓöÇΓöÇ datasets/
-Γöé   ΓööΓöÇΓöÇ audubon/
-Γöé       Γö£ΓöÇΓöÇ raw/                         # Untouched source material
-Γöé       Γöé   Γö£ΓöÇΓöÇ img/
-Γöé       Γöé   Γöé   ΓööΓöÇΓöÇ ranges/              # 1-99/, 100-199/, etc
-Γöé       Γöé   Γö£ΓöÇΓöÇ data.json
-Γöé       Γöé   ΓööΓöÇΓöÇ README.md
-Γöé       Γöé
-Γöé       Γö£ΓöÇΓöÇ structured/                  # Plate-centric canonical form
-Γöé       Γöé   ΓööΓöÇΓöÇ plate-XXX/
-Γöé       Γöé       Γö£ΓöÇΓöÇ manifest.json
-Γöé       Γöé       Γö£ΓöÇΓöÇ source.sha256
-Γöé       Γöé       Γö£ΓöÇΓöÇ source/
-Γöé       Γöé       Γöé   ΓööΓöÇΓöÇ plate-XXX.original.jpg
-Γöé       Γöé       Γö£ΓöÇΓöÇ derived/
-Γöé       Γöé       Γöé   Γö£ΓöÇΓöÇ input_image.json
-Γöé       Γöé       Γöé   ΓööΓöÇΓöÇ image_header.json
-Γöé       Γöé       Γö£ΓöÇΓöÇ runs/
-Γöé       Γöé       Γöé   ΓööΓöÇΓöÇ run-YYYYMMDD-HHMMSS-<hash>/
-Γöé       Γöé       Γöé       Γö£ΓöÇΓöÇ run.manifest.json
-Γöé       Γöé       Γöé       Γö£ΓöÇΓöÇ config.json
-Γöé       Γöé       Γöé       Γö£ΓöÇΓöÇ outputs/
-Γöé       Γöé       Γöé       Γöé   Γö£ΓöÇΓöÇ embeddings/
-Γöé       Γöé       Γöé       Γöé   Γö£ΓöÇΓöÇ segments/
-Γöé       Γöé       Γöé       Γöé   Γö£ΓöÇΓöÇ metrics/
-Γöé       Γöé       Γöé       Γöé   ΓööΓöÇΓöÇ visuals/
-Γöé       Γöé       Γöé       ΓööΓöÇΓöÇ run.sha256
-Γöé       Γöé       ΓööΓöÇΓöÇ viz/                 # Human-readable previews only
-Γöé       Γöé
-Γöé       Γö£ΓöÇΓöÇ ledgers/
-Γöé       Γöé   Γö£ΓöÇΓöÇ plates.parquet
-Γöé       Γöé   Γö£ΓöÇΓöÇ runs.parquet
-Γöé       Γöé   Γö£ΓöÇΓöÇ embeddings.parquet
-Γöé       Γöé   Γö£ΓöÇΓöÇ segments.parquet
-Γöé       Γöé   ΓööΓöÇΓöÇ neptune_ingest.parquet
-Γöé       Γöé
-Γöé       Γö£ΓöÇΓöÇ schemas/
-Γöé       Γöé   Γö£ΓöÇΓöÇ plate.manifest.schema.json
-Γöé       Γöé   Γö£ΓöÇΓöÇ run.manifest.schema.json
-Γöé       Γöé   Γö£ΓöÇΓöÇ embedding.schema.json
-Γöé       Γöé   Γö£ΓöÇΓöÇ segment.schema.json
-Γöé       Γöé   ΓööΓöÇΓöÇ neptune.node.schema.json
-Γöé       Γöé
-Γöé       ΓööΓöÇΓöÇ validators/
-Γöé           Γö£ΓöÇΓöÇ filesystem.py
-Γöé           Γö£ΓöÇΓöÇ schemas.py
-Γöé           Γö£ΓöÇΓöÇ checksums.py
-Γöé           ΓööΓöÇΓöÇ neptune_contract.py
-Γöé
-Γö£ΓöÇΓöÇ graph/
-Γöé   Γö£ΓöÇΓöÇ neptune/
-Γöé   Γöé   Γö£ΓöÇΓöÇ nodes/
-Γöé   Γöé   Γö£ΓöÇΓöÇ edges/
-Γöé   Γöé   Γö£ΓöÇΓöÇ bulk_load/
-Γöé   Γöé   ΓööΓöÇΓöÇ mapping/
-Γöé   Γöé
-Γöé   ΓööΓöÇΓöÇ ontology/
-Γöé       Γö£ΓöÇΓöÇ core.ttl
-Γöé       Γö£ΓöÇΓöÇ audubon.ttl
-Γöé       Γö£ΓöÇΓöÇ burning_world.ttl
-Γöé       ΓööΓöÇΓöÇ provenance.ttl
-Γöé
-Γö£ΓöÇΓöÇ notebooks/
-Γö£ΓöÇΓöÇ scripts/
-ΓööΓöÇΓöÇ docs/
+|-- datasets/
+|   `-- audubon/
+|       |-- raw/                         # Untouched source material
+|       |   |-- img/
+|       |   `-- ranges/                  # 1-99/, 100-199/, etc
+|       |-- data.json
+|       `-- README.md
+|
+|-- structured/                          # Plate-centric canonical form
+|   `-- plate-XXX/
+|       |-- manifest.json
+|       |-- source.sha256
+|       |-- source/
+|       |   `-- plate-XXX.original.jpg
+|       |-- derived/
+|       |   |-- input_image.json
+|       |   `-- image_header.json
+|       |-- runs/
+|       |   `-- run-YYYYMMDD-HHMMSS-<hash>/
+|       |       |-- run.manifest.json
+|       |       |-- config.json
+|       |       |-- outputs/
+|       |       |   |-- embeddings/
+|       |       |   |-- segments/
+|       |       |   |-- metrics/
+|       |       |   `-- visuals/
+|       |       |-- run.sha256
+|       |       `-- viz/                 # Human-readable previews only
+|
+|-- ledgers/
+|   |-- plates.parquet
+|   |-- runs.parquet
+|   |-- embeddings.parquet
+|   |-- segments.parquet
+|   `-- neptune_ingest.parquet
+|
+|-- schemas/
+|   |-- plate.manifest.schema.json
+|   |-- run.manifest.schema.json
+|   |-- embedding.schema.json
+|   |-- segment.schema.json
+|   `-- neptune.node.schema.json
+|
+|-- validators/
+|   |-- filesystem.py
+|   |-- schemas.py
+|   |-- checksums.py
+|   `-- neptune_contract.py
+|
+|-- graph/
+|   `-- neptune/
+|       |-- nodes/
+|       |-- edges/
+|       |-- bulk_load/
+|       `-- mapping/
+|
+|-- ontology/
+|   |-- core.ttl
+|   |-- audubon.ttl
+|   |-- burning_world.ttl
+|   `-- provenance.ttl
+|
+|-- notebooks/
+|-- scripts/
+`-- docs/
 ```
 
 ---
@@ -123,12 +122,12 @@ burning-world-series/
 ### 1. Plate identifiers (immutable)
 
 ```
-plate-001 ΓÇª plate-435
+plate-001 ... plate-435
 ```
 
-ΓÇó Zero-padded  
-ΓÇó No aliases  
-ΓÇó Never inferred from filenames after bootstrap
+- Zero-padded  
+- No aliases  
+- Never inferred from filenames after bootstrap
 
 ---
 
@@ -147,7 +146,7 @@ Where `<hash>` = SHA-1(models + config + code_version)[:8]
 - missing config.json
     
 - timestamp mismatch  
-    ΓåÆ abort
+    -> abort
     
 
 ---
@@ -186,7 +185,7 @@ plate-123__run-20260112-142233-acde9123__metric__entropy.json
     "sam-vit-h"
   ],
   "code_version": "git:9f3c2a1",
-  "config_hash": "sha256:ΓÇª",
+  "config_hash": "sha256:...",
   "inputs": [
     "source/plate-123.original.jpg"
   ],
@@ -198,7 +197,7 @@ plate-123__run-20260112-142233-acde9123__metric__entropy.json
 
 **Rules**
 
-- outputs list must be populated before status ΓåÆ `complete`
+- outputs list must be populated before status -> `complete`
     
 - neptune_nodes must be resolvable to graph IDs
     
@@ -294,15 +293,16 @@ Reject entire run if:
 
 ### 2. Neptune bulk ingestion pipeline
 
-**Filesystem ΓåÆ Parquet ΓåÆ CSV ΓåÆ Neptune**
+**Filesystem -> Parquet -> CSV -> Neptune**
 
 ```
 ledgers/*.parquet
-   Γåô
+   |
+   v
 graph/neptune/bulk_load/
-   Γö£ΓöÇΓöÇ nodes.csv
-   Γö£ΓöÇΓöÇ edges.csv
-   ΓööΓöÇΓöÇ load.properties
+   |-- nodes.csv
+   |-- edges.csv
+   `-- load.properties
 ```
 
 Each row must include:
@@ -316,7 +316,7 @@ Each row must include:
 - `checksum`
     
 
-If any row cannot be reverse-resolved ΓåÆ **entire load rejected**
+If any row cannot be reverse-resolved -> **entire load rejected**
 
 ---
 
@@ -324,13 +324,13 @@ If any row cannot be reverse-resolved ΓåÆ **entire load rejected**
 
 You must maintain:
 
-- `core.ttl` ΓåÆ generic graph concepts
+- `core.ttl` -> generic graph concepts
     
-- `audubon.ttl` ΓåÆ species, plates, taxonomy
+- `audubon.ttl` -> species, plates, taxonomy
     
-- `burning_world.ttl` ΓåÆ counterfactual constructs
+- `burning_world.ttl` -> counterfactual constructs
     
-- `provenance.ttl` ΓåÆ run, artifact, derivation
+- `provenance.ttl` -> run, artifact, derivation
     
 
 **No node enters Neptune without ontology grounding.**
@@ -339,12 +339,12 @@ You must maintain:
 
 ## VIII. What this system gives you
 
-ΓÇó Museum-grade auditability  
-ΓÇó Paper-ready reproducibility  
-ΓÇó Zero silent drift  
-ΓÇó Safe ML experimentation  
-ΓÇó Ability to retract or supersede interpretations without deleting history  
-ΓÇó A graph that can survive 20 years of reinterpretation
+- Museum-grade auditability  
+- Paper-ready reproducibility  
+- Zero silent drift  
+- Safe ML experimentation  
+- Ability to retract or supersede interpretations without deleting history  
+- A graph that can survive 20 years of reinterpretation
 
 Most importantly:  
 **It keeps interpretation downstream from evidence.**
@@ -372,7 +372,7 @@ If you want next:
     
 - Create the validator code skeletons
     
-- Design the ΓÇ£Burning WorldΓÇ¥ ontology layer
+- Design the "Burning World" ontology layer
     
 - Map this directly to a paper methods section
     
